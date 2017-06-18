@@ -153,7 +153,7 @@ for (j=0;j<NM;j++){
  
 printf("Makespan: %f\n",makespan);
  
-printf("[");
+printf("[ ");
 for (i=0;i<NT;i++){
     printf("%d ",asig[i]);
 }
