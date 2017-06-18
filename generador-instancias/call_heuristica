@@ -1,2 +1,2 @@
 #!/bin/bash
-./heuristica-resolucion-hcsp A.u_c_hihi > target
+./heuristica-resolucion-hcsp B.u_c_hihi > target

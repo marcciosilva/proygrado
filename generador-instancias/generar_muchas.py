@@ -25,7 +25,7 @@ for i in range(0,int(data_size)):
     #no se ejecutó directamente el generador porque me dio problemas
     subprocess.call(project_location + "call_generador",shell=True)
     #abrimos el archivo generado por el generador
-    attrs_example = open('A.u_c_hihi', 'r')
+    attrs_example = open('B.u_c_hihi', 'r')
 
     line = attrs_example.readline() #descartamos la primera la porque se genera
                                     #indicando la cantidad de máquinas
@@ -49,14 +49,17 @@ for i in range(0,int(data_size)):
     line = line.replace("]", "")
     line = line.replace("[", "")
     array_numbers = line.split(" ")
+    print array_numbers
     array_numbers.remove('\n')
+    array_numbers.remove('')
     #agrego la solución a la linea
     lines.append(map(int,array_numbers))
     #agrego la linea a el csv
     resultwriter.writerow(lines)
     #remuevo todos los archivos, hago flush de las cosas y espero un poco, se ve que la
     #i/o precisa algo de tiempo
-    os.remove("A.u_c_hihi")
+    os.remove("B.u_c_hihi")
+    os.remove("B.u_c_hihi.log")
     os.remove("target")
     attrs_example.flush()
     attrs_example = None
