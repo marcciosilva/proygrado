@@ -1,0 +1,2 @@
+#!/bin/bash
+./heuristica-resolucion-hcsp A.u_c_hihi > target

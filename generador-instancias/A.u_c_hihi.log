@@ -1,0 +1,7 @@
+File: [A.u_c_hihi]
+Test scenario with 12 tasks and 4 machines
+Model A, distribution u, consistency c
+RT:100000, RM:100
+Task heterogeneity: hi, Machine heterogeneity: hi
+Type of task execution times: real.
+seed: [1497792137]
