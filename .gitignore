@@ -2,6 +2,7 @@
 jobs/
 ejemplos*/
 *.log
+models/
 
 # Pycharm
 .idea/
