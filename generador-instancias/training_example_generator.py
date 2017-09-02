@@ -13,7 +13,7 @@ import generar_jobs
 # Command to execute the problem instance generator (legacy software).
 GENERATOR_COMMAND = './generator'
 # Command to execute the problem solver, given a problem instance (legacy software).
-SOLVER_COMMAND = './heuristica-resolucion-hcsp'
+SOLVER_COMMAND = './solver'
 SEPARATOR = ' '
 # File types of the generated raw data.
 INPUT_SUFFIX = '.in'

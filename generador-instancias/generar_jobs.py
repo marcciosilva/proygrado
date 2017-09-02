@@ -12,11 +12,11 @@ OUTPUT_PATH = 'jobs/'
 # Command for executing the instance generator script.
 GENERATOR = 'python training_example_generator.py '
 # Directory where the training examples will be located (problem representation and solution separated in multiple files).
-GENERATOR_DIR = 'ejemplos-entrenamiento-separados/'
+GENERATOR_DIR = 'data-raw/'
 # Command for executing the parser to unify the raw data (connecting a problem's representation with its solution).
 PARSER = 'python parser.py '
 # Directory where the unified examples will exist.
-PARSER_DIR = 'ejemplos-entrenamiento-unificados/'
+PARSER_DIR = 'data-processed/'
 # Amount of jobs in which the whole task will be divided.
 # If the data generation is not serial, this should be an even number, so each generation + parsing task is
 # contained in a single job.
