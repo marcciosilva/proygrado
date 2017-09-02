@@ -1,34 +1,33 @@
 # coding=utf-8
 '''
-Este script genera un (o varios) .sh que se va a encargar de generar ejemplos de entrenamiento.
+This script generates one (or multiple) .sh file that'll handle the generation of training examples (processed .csv files ultimately).
 '''
 import os
 import errno
 import math
 
 PARENT_DIR = ''
-# Donde van a quedar alojados los scripts finales
+# Where the final scripts will exist.
 OUTPUT_PATH = 'jobs/'
-# Comando para llamar al generador de instancias
+# Command for executing the instance generator script.
 GENERATOR = 'python training_example_generator.py '
-# Directorio donde se van a dejar los ejemplos al final (instancia y solucion en archivos separados)
+# Directory where the training examples will be located (problem representation and solution separated in multiple files).
 GENERATOR_DIR = 'ejemplos-entrenamiento-separados/'
-# Comando para llamar al parser que unifica instancias con sus salidas
+# Command for executing the parser to unify the raw data (connecting a problem's representation with its solution).
 PARSER = 'python parser.py '
-# Directorio donde se van a dejar los ejemplos unificados
+# Directory where the unified examples will exist.
 PARSER_DIR = 'ejemplos-entrenamiento-unificados/'
-# Cantidad de jobs a iniciar para generar ejemplos de entrenamiento
-# Deberia ser un numero par (para que en el split de listas no queden separados
-# la generacion y el parsing de un ejemplo)
+# Amount of jobs in which the whole task will be divided.
+# If the data generation is not serial, this should be an even number, so each generation + parsing task is
+# contained in a single job.
 JOB_AMOUNT = 10
-# Cantidad de instancias de test a utilizar en primer lugar, cantidad de instancias
-# de entrenamiento a utilizar en segundo lugar
+# Amount of test instances to use, and amount of training instances to use (respectively).
 TEST_TRAINING_AMOUNT = [100, 600]
-# Tipos de problema, donde la clave indica la cantidad de tareas del problema, y el valor
-# indica la cantidad de maquinas
+# Types of problems, where the key refers to the task amount, and the value refers to the
+# machine amount.
 PROBLEM_TYPES = {128: 4, 512: 16}
 # Whether to generate data serially (so one job will basically generate all of the .in and .out pairs for
-# all types of problems FIRST, while the rest can be executed in parallel later) or not.
+# all types of problems FIRST, while the rest of the jobs can be executed in parallel later) or not.
 SERIAL_INITIAL_DATA_GENERATION = True
 
 def chunks(lst, chunk_amount):
@@ -50,10 +49,9 @@ def generate_dir(path):
             raise
 
 def main():
-    # En este array se van a guardar los comandos a ejecutar para generar instancias
-    # Se van a tener tantos elementos como archivos de generacion existan
-    # La idea es generar tantos archivos como jobs se quieran ejecutar en el cluster,
-    # para paralelizar
+    # This array will hold the commands to execute to generate instances.
+    # It'll have as many elements as generation files (raw data) exist.
+    # The idea is to generate as many files as jobs are meant to be executed at a cluster.
     commands = []    
     # Generate jobs directory
     generate_dir(OUTPUT_PATH)
@@ -95,7 +93,6 @@ def main():
         commands = []
     ###########################################################################################
     ###########################################################################################
-
     for machine_amount in range(0, 2):
         for task_heterogeneity_type in range(0, 2):
             for machine_heterogeneity_type in range(0, 3):

@@ -1,9 +1,6 @@
 # coding = utf-8
 '''
-Script para generar ejemplos de entrenamiento de la forma i.input e i.output (archivos)
-La idea es setear los parametros en este archivo para determinar el tipo de instancia
-de HCSP, y se generan tantas instancias de entrenamiento (par de archivos) como
-se quiera
+This script generates instances of the HCSP problem in the form of a pair of .in and .out files (raw data).
 '''
 import os
 import re
@@ -13,18 +10,18 @@ import time
 
 import generar_jobs
 
-# Comando para llamar al generador de instancias
+# Command to execute the problem instance generator (legacy software).
 GENERATOR_COMMAND = './generator'
-# Comando para llamar al resolvedor de instancias del problema
+# Command to execute the problem solver, given a problem instance (legacy software).
 SOLVER_COMMAND = './heuristica-resolucion-hcsp'
 SEPARATOR = ' '
-# Tipos de archivo de las salidas
+# File types of the generated raw data.
 INPUT_SUFFIX = '.in'
 OUTPUT_SUFFIX = '.out'
 MOVE_COMMAND = 'mv'
 
 def main():
-    # Se obtienen caracteristicas del problema de consola
+    # The problem specification is obtained from the user input.
     try:
         task_amount = int(sys.argv[1])
         machine_amount = int(sys.argv[2])
@@ -34,48 +31,51 @@ def main():
         amount_of_instances = int(sys.argv[6])
         output_path = str(sys.argv[7])
     except Exception:
-        print 'Uso del script: python training_example_generator.py cantidad-tareas \
-			cantidad-maquinas heterogeneidad-tareas heterogeneidad-maquinas \
-			tipo-consistencia cantidad-instancias directorio-salida'
+        print 'Usage: python training_example_generator.py task-amount \
+			machine-amount task-heterogeneity machine-heterogeneity \
+			consistency-type instance-amount output-dir'
         print '### Tipos ###'
-        print 'cantidad-tareas : int'
-        print 'cantidad-maquinas : int'
-        print 'heterogeneidad-tareas : 0 = Low, 1 = High'
-        print 'heterogeneidad-maquinas : 0 = Low, 1 = High'
-        print 'tipo-consistencia : 0 = Consistent, 1 = Semiconsistent, 2 = Inconsistent'
-        print 'cantidad-instancias : int'
-        print 'directorio-salida : str'
-        print 'Ejemplo: python training_example_generator.py 4 16 0 0 0 100 \
-			ejemplos-entrenamiento-separados/4x16-000/test/'
+        print 'task-amount : int'
+        print 'machine-amount : int'
+        print 'task-heterogeneity : 0 = Low, 1 = High'
+        print 'machine-heterogeneity : 0 = Low, 1 = High'
+        print 'consistency-type : 0 = Consistent, 1 = Semiconsistent, 2 = Inconsistent'
+        print 'instance-amount : int'
+        print 'output-dir : str'
+        print 'Example: python training_example_generator.py 4 16 0 0 0 100 \
+			data-raw/4x16-000/test/'
     for i in range(0, amount_of_instances):
-        # Se genera instancia del problema
+        # The problem instance is generated.
         status, output = commands.getstatusoutput(\
         GENERATOR_COMMAND + SEPARATOR + str(task_amount) + SEPARATOR + str(machine_amount) \
 		+ SEPARATOR + str(task_heterogeneity_type) + SEPARATOR \
 		+ str(machine_heterogeneity_type) + SEPARATOR + str(consistency_type))
-        # Se obtiene una referencia al archivo generado
+        # A reference to the generated files is obtained.
+        # TODO maybe generate a path for this individual instance of the script to deal
+        # with the filesystem, so as to allow multi processing in the future.
+        # Executions of this script must be serial as of now.
         filename_regex = '.*\[(.*)\].*'
         match = re.search(filename_regex, output)
         filename = match.group(1)
         cmd = SOLVER_COMMAND + SEPARATOR + filename + ' > ' + str(i) + OUTPUT_SUFFIX
-        # Se aplica la resolucion a la instancia generada
+        # The solver is applied to the generated problem instance.
         os.system(cmd)
         os.rename(filename, str(i) + INPUT_SUFFIX)
-        # Si no existe, se genera el directorio de salida
+        # The output directory is generated if it doesn't exist (view docs).
         generar_jobs.generate_dir(output_path)
-        # Se mueven archivos generados a carpeta de destino
+        # Generated files are moved to the destination folder.
         cmd = MOVE_COMMAND + SEPARATOR + str(i) + OUTPUT_SUFFIX + SEPARATOR + output_path
         os.system(cmd)
         cmd = MOVE_COMMAND + SEPARATOR + str(i) + INPUT_SUFFIX + SEPARATOR + output_path
         os.system(cmd)
-        # Si pasa poco tiempo entre las llamadas al generator, no se genera una random seed
-        # nueva (supongo), entonces meto delay para que las instancias generadas
-        # sean realmente distintas.
+        # A sleep is required because if generator calls are too close (in time) to each other, 
+        # maybe the C/C++ random seed isn't regenerated and the exact same problem instance is
+        # generated.
         time.sleep(1)
-    # Ahora en el directorio de salida tengo una pareja de archivos .in y .out que representan
-    # a una instancia completa del problema (entrada y salida)
-    print 'Parejas de archivos ' + INPUT_SUFFIX + ' y ' + OUTPUT_SUFFIX \
-	    + ' generados en ' + output_path
+    # Now I have a pair of .in and .out files in my output directory, representing a complete
+    # problem instance (featuring an input or representation, and output or solution).
+    print 'Pair of ' + INPUT_SUFFIX + ' and ' + OUTPUT_SUFFIX \
+	    + ' files generated at ' + output_path
 
 if __name__ == "__main__":
     main()
