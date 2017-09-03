@@ -1,6 +1,7 @@
 # Datos
 jobs/
 ejemplos*/
+data*/
 *.log
 models/
 
