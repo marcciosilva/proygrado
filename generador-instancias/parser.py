@@ -63,7 +63,6 @@ def main():
             resultwriter = csv.writer(csvfile, delimiter=',')
             # lines will be an array with all of the values of the generated file.
             # The expected tuple will also be added later.
-			# Más adelante le agregaremos la tupla esperada.
             lines = []
             # A column is added for each ETC matrix value.
             for time_value in etc_matrix:
@@ -73,7 +72,7 @@ def main():
             # The line is added to the .csv file.
             resultwriter.writerow(lines)
             csvfile.close()
-    print 'Archivos .csv creados en ' + output_path
+    print '.csv files created at ' + output_path
 
 def is_csv_empty(file_name):
     '''
