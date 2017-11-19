@@ -1,3 +1,0 @@
-Results are in the following form: makespan difference#execution time#average accuracy
-969.8538#22.4107818604#0.712578125
-946.7348#21.9167320728#0.706328125
