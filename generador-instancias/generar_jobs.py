@@ -29,6 +29,9 @@ PROBLEM_TYPES = {128: 4} #, 512: 16}
 # Whether to generate data serially (so one job will basically generate all of the .in and .out pairs for
 # all types of problems FIRST, while the rest of the jobs can be executed in parallel later) or not.
 SERIAL_INITIAL_DATA_GENERATION = True
+TASK_HETEROGENEITY_VALUES = [0]#, 1]
+MACHINE_HETEROGENEITY_VALUES = [0]#, 1]
+CONSISTENCY_TYPE_VALUES = [0]#, 1, 2]
 
 def chunks(lst, chunk_amount):
     """
@@ -58,9 +61,10 @@ def main():
     if SERIAL_INITIAL_DATA_GENERATION:
         print 'Working with serial raw data generation'
         # Create serial job that generates training examples (doesn't handle parsing)
-        for machine_amount in range(0, 2):
-            for task_heterogeneity_type in range(0, 2):
-                for machine_heterogeneity_type in range(0, 3):
+        # TODO Make ranges configurable (maybe I just want to generate 000 and not 001 and so on).
+        for task_heterogeneity in TASK_HETEROGENEITY_VALUES:
+            for machine_heterogeneity in MACHINE_HETEROGENEITY_VALUES:
+                for consistency_type in CONSISTENCY_TYPE_VALUES:
                     # For each problem type or dimension
                     for tasks in PROBLEM_TYPES.keys():
                         for instance_amount in TEST_TRAINING_AMOUNT:
@@ -72,13 +76,13 @@ def main():
                                 dir_suffix = '/training/'
                             # sub_dir is the identifier for each problem instance
                             sub_dir = str(tasks) + 'x' + str(machines) + '-' + \
-                                str(machine_amount) + str(task_heterogeneity_type) + \
-                                str(machine_heterogeneity_type) + dir_suffix
+                                str(task_heterogeneity) + str(machine_heterogeneity) + \
+                                str(consistency_type) + dir_suffix
                             directory = GENERATOR_DIR + sub_dir
                             # Add commands to commands object
                             commands.append(GENERATOR + str(tasks) + ' ' + str(machines) + ' ' \
-                                + str(machine_amount) + ' ' + str(task_heterogeneity_type) + ' ' \
-                                + str(machine_heterogeneity_type) + ' ' + str(instance_amount) \
+                                + str(task_heterogeneity) + ' ' + str(machine_heterogeneity) + ' ' \
+                                + str(consistency_type) + ' ' + str(instance_amount) \
                                 + ' ' + directory)
                             # Output directory is generated for later use
                             generate_dir(directory)
@@ -93,9 +97,9 @@ def main():
         commands = []
     ###########################################################################################
     ###########################################################################################
-    for machine_amount in range(0, 2):
-        for task_heterogeneity_type in range(0, 2):
-            for machine_heterogeneity_type in range(0, 3):
+    for task_heterogeneity in TASK_HETEROGENEITY_VALUES:
+        for machine_heterogeneity in MACHINE_HETEROGENEITY_VALUES:
+            for consistency_type in CONSISTENCY_TYPE_VALUES:
                 # For each problem type or dimension
                 for tasks in PROBLEM_TYPES.keys():
                     for instance_amount in TEST_TRAINING_AMOUNT:
@@ -107,8 +111,8 @@ def main():
                             dir_suffix = '/training/'
                         # sub_dir is the identifier for each problem instance
                         sub_dir = str(tasks) + 'x' + str(machines) + '-' + \
-                            str(machine_amount) + str(task_heterogeneity_type) + \
-                            str(machine_heterogeneity_type) + dir_suffix
+                            str(task_heterogeneity) + str(machine_heterogeneity) + \
+                            str(consistency_type) + dir_suffix
                         # If not generating raw data in a serial way, then the generation has to
                         # be split up in jobs, so each job will generate raw data, instead of it
                         # being generated in a serial single job
@@ -117,8 +121,8 @@ def main():
                             directory = GENERATOR_DIR + sub_dir
                             # Add commands to commands object
                             commands.append(GENERATOR + str(tasks) + ' ' + str(machines) + ' ' \
-                                + str(machine_amount) + ' ' + str(task_heterogeneity_type) + ' ' \
-                                + str(machine_heterogeneity_type) + ' ' + str(instance_amount) \
+                                + str(task_heterogeneity) + ' ' + str(machine_heterogeneity) + ' ' \
+                                + str(consistency_type) + ' ' + str(instance_amount) \
                                 + ' ' + directory)
                             # Output directory is generated for later use
                             generate_dir(directory)                            
