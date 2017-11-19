@@ -20,12 +20,12 @@ PARSER_DIR = 'data-processed/'
 # Amount of jobs in which the whole task will be divided.
 # If the data generation is not serial, this should be an even number, so each generation + parsing task is
 # contained in a single job.
-JOB_AMOUNT = 10
+JOB_AMOUNT = 1 # TODO make this not matter when serial data generation is used.
 # Amount of test instances to use, and amount of training instances to use (respectively).
 TEST_TRAINING_AMOUNT = [100, 600]
 # Types of problems, where the key refers to the task amount, and the value refers to the
 # machine amount.
-PROBLEM_TYPES = {128: 4, 512: 16}
+PROBLEM_TYPES = {128: 4} #, 512: 16}
 # Whether to generate data serially (so one job will basically generate all of the .in and .out pairs for
 # all types of problems FIRST, while the rest of the jobs can be executed in parallel later) or not.
 SERIAL_INITIAL_DATA_GENERATION = True
