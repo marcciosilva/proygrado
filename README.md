@@ -3,8 +3,7 @@
 ## Informe
 
 Links al informe en Overleaf:
-* Ver: https://www.overleaf.com/read/rvxvncjjnctw
-* Ver y editar: https://www.overleaf.com/9389113wtsmmdgxpczf
+* Ver: https://www.overleaf.com/read/bywzptctqyzp
 
 Para generar datos:
 * Editar el archivo `generar_jobs.py` modificando las variables de configuración para definir cosas como los tipos de problemas a generar, directorios a utilizar y demás.
