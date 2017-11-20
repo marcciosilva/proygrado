@@ -1,7 +1,7 @@
 start=`date +%s`
 HEADER_MSG='Results are in the following form: makespan difference#execution time#average accuracy'
 FILE_EXT='.txt'
-echo $HEADER_MSG >> 'report_full_etc_sv'$FILE_EXT
+echo $HEADER_MSG >> 'report_full_etc_svm'$FILE_EXT
 echo $HEADER_MSG >> 'report_partial_etc_svm'$FILE_EXT
 echo $HEADER_MSG >> 'report_full_etc_ann'$FILE_EXT
 echo $HEADER_MSG >> 'report_partial_etc_ann'$FILE_EXT
@@ -29,9 +29,12 @@ do
     echo "#### Generating report for full etc with SVM and ANN... ####"
     current_file='report_full_etc_sv'
     echo "#### Generating reports with full ETC... ####"
-    ((python classifier_generator.py 128 4 0 0 0 True 1 >> 'report_full_etc_svm'$FILE_EXT) & (python classifier_generator.py 128 4 0 0 0 True 0 >> 'report_full_etc_ann'$FILE_EXT)) \
-        && echo "#### Removing models to test with partial ETC... ####" && rm -rf models/ \
-        && ((python classifier_generator.py 128 4 0 0 0 False 1 >> 'report_partial_etc_svm'$FILE_EXT) & (python classifier_generator.py 128 4 0 0 0 False 0 >> 'report_partial_etc_ann'$FILE_EXT))
+    python classifier_generator.py 128 4 0 0 0 True 1 >> 'report_full_etc_svm'$FILE_EXT
+    python classifier_generator.py 128 4 0 0 0 True 0 >> 'report_full_etc_ann'$FILE_EXT
+    echo "#### Removing models to test with partial ETC... ####"
+    rm -rf models/
+    python classifier_generator.py 128 4 0 0 0 False 1 >> 'report_partial_etc_svm'$FILE_EXT
+    python classifier_generator.py 128 4 0 0 0 False 0 >> 'report_partial_etc_ann'$FILE_EXT
     now=`date +%s`
     runtime=$((now-start))
     echo "Runtime up until now is "$runtime" seconds"
