@@ -20,11 +20,14 @@ from sklearn.model_selection import GridSearchCV
 import generar_jobs
 import time
 from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.decomposition import PCA
 
 # Runtime configuration.
 DEBUG_MODE = False
 SCALE_DATA = True
 USE_PARAMETER_SELECTION = False
+USE_PIPELINE = True
 # Classifier ID information.
 CLASSIFIER_STRING_ANN = 'ann'
 CLASSIFIER_STRING_SVM = 'svm'
@@ -40,13 +43,14 @@ chosen_classifier_index = None
 # Result holders.
 accuracy_scores = []
 classifiers = []
+pipelines = []
 MODEL_FILE_EXTENSION = '.pkl'
 MODEL_FILE_PREFIX = 'clf-'
 
 
 def main():
     global task_amount, machine_amount, task_heterogeneity, machine_heterogeneity, consistency_type, USING_ENTIRE_ETC
-    global chosen_classifier_index, accuracy_scores, classifiers
+    global chosen_classifier_index, accuracy_scores, classifiers, pipelines
     # The problem specification is obtained from the user input.
     try:
         task_amount = int(sys.argv[1])
@@ -128,6 +132,11 @@ def main():
             scaler.fit(df_test_input)
             # Scale test data.
             df_test_input = pd.DataFrame(scaler.transform(df_test_input))
+        if USE_PIPELINE:
+            for i in range(0,128):
+                pipelines.append(Pipeline([ ('StandardScaler', StandardScaler()),('pca', PCA(n_components == 'mle' and svd_solver)), ('classify', classifiers[i]) ]))
+
+
         if chosen_classifier == CLASSIFIER_STRING_SVM:
             if USE_PARAMETER_SELECTION:
                 # Grid of parameters, including all posible parameters for each configuration of
@@ -145,7 +154,11 @@ def main():
                 # as a normal classifier (according to documentation it uses the best estimator)
                 # However, it fits every possible estimator with the data, so that's something of note.
         # Classifier is trained using the data.
-        classifiers[i].fit(df_training_input, df_training_output)
+        if (USE_PIPELINE):
+            pipelines[i].fit(df_training_input, df_training_output)
+        else:
+            classifiers[i].fit(df_training_input, df_training_output)
+
         # Classifier directory is generated if it doesn't exist.
         if (not DEBUG_MODE):
             blockPrint()
@@ -175,8 +188,14 @@ def main():
                 # Every test example is classified, and its classification is appended
                 # to a results array.
                 # Make prediction for current problem instance or etc matrix (using scaled data).
-                prediction_pandas = float(classifiers[i].predict(
-                    etc_matrix_scaled.values.reshape(1, -1)))
+                if (USE_PIPELINE):
+                    prediction_pandas = float(pipelines[i].predict(
+                        etc_matrix_scaled.values.reshape(1, -1)))
+                else:
+                    prediction_pandas = float(classifiers[i].predict(
+                        etc_matrix_scaled.values.reshape(1, -1)))
+
+
                 results.append(prediction_pandas)
                 prediction = float(prediction_pandas)  # To work in floats.
 
