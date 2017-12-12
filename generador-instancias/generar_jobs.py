@@ -46,7 +46,7 @@ def generate_dir(path):
     """
     try:
         os.makedirs(path)
-        print 'Directory ' + path + ' created or already existed.'
+        print ('Directory ' + path + ' created or already existed.')
     except OSError as error:
         if error.errno != errno.EEXIST:
             raise
@@ -59,7 +59,7 @@ def main():
     # Generate jobs directory
     generate_dir(OUTPUT_PATH)
     if SERIAL_INITIAL_DATA_GENERATION:
-        print 'Working with serial raw data generation'
+        print ('Working with serial raw data generation')
         # Create serial job that generates training examples (doesn't handle parsing)
         # TODO Make ranges configurable (maybe I just want to generate 000 and not 001 and so on).
         for task_heterogeneity in TASK_HETEROGENEITY_VALUES:
@@ -92,7 +92,7 @@ def main():
         for command in commands:
             tmp_file.write(command + '\n')
         tmp_file.close()
-        print 'Raw data generation script generated in ' + OUTPUT_PATH
+        print ('Raw data generation script generated in ' + OUTPUT_PATH)
         # Clean up
         commands = []
     ###########################################################################################
@@ -141,7 +141,7 @@ def main():
         for command in job:
             tmp_file.write(command + '\n')
         tmp_file.close()
-    print 'Job scripts created at ' + OUTPUT_PATH        
+    print ('Job scripts created at ' + OUTPUT_PATH)
 
 if __name__ == '__main__':
     main()
