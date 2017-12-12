@@ -4,7 +4,7 @@ This script generates instances of the HCSP problem in the form of a pair of .in
 '''
 import os
 import re
-import commands
+import subprocess
 import sys
 import time
 
@@ -31,22 +31,22 @@ def main():
         amount_of_instances = int(sys.argv[6])
         output_path = str(sys.argv[7])
     except Exception:
-        print 'Usage: python training_example_generator.py task-amount \
+        print ('Usage: python training_example_generator.py task-amount \
 			machine-amount task-heterogeneity machine-heterogeneity \
-			consistency-type instance-amount output-dir'
-        print '### Tipos ###'
-        print 'task-amount : int'
-        print 'machine-amount : int'
-        print 'task-heterogeneity : 0 = Low, 1 = High'
-        print 'machine-heterogeneity : 0 = Low, 1 = High'
-        print 'consistency-type : 0 = Consistent, 1 = Semiconsistent, 2 = Inconsistent'
-        print 'instance-amount : int'
-        print 'output-dir : str'
-        print 'Example: python training_example_generator.py 4 16 0 0 0 100 \
-			data-raw/4x16-000/test/'
+			consistency-type instance-amount output-dir')
+        print ('### Tipos ###')
+        print ('task-amount : int')
+        print ('machine-amount : int')
+        print ('task-heterogeneity : 0 = Low, 1 = High')
+        print ('machine-heterogeneity : 0 = Low, 1 = High')
+        print ('consistency-type : 0 = Consistent, 1 = Semiconsistent, 2 = Inconsistent')
+        print ('instance-amount : int')
+        print ('output-dir : str')
+        print ('Example: python training_example_generator.py 4 16 0 0 0 100 \
+			data-raw/4x16-000/test/')
     for i in range(0, amount_of_instances):
         # The problem instance is generated.
-        status, output = commands.getstatusoutput(\
+        status, output = subprocess.getstatusoutput(\
         GENERATOR_COMMAND + SEPARATOR + str(task_amount) + SEPARATOR + str(machine_amount) \
 		+ SEPARATOR + str(task_heterogeneity_type) + SEPARATOR \
 		+ str(machine_heterogeneity_type) + SEPARATOR + str(consistency_type))
@@ -74,8 +74,8 @@ def main():
         time.sleep(1)
     # Now I have a pair of .in and .out files in my output directory, representing a complete
     # problem instance (featuring an input or representation, and output or solution).
-    print 'Pair of ' + INPUT_SUFFIX + ' and ' + OUTPUT_SUFFIX \
-	    + ' files generated at ' + output_path
+    print ('Pair of ' + INPUT_SUFFIX + ' and ' + OUTPUT_SUFFIX \
+	    + ' files generated at ' + output_path)
 
 if __name__ == "__main__":
     main()

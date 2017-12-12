@@ -18,13 +18,13 @@ def main():
         input_path = str(sys.argv[2])
         output_path = str(sys.argv[3])
     except Exception:
-        print 'Usage: python parser.py instance-amount input-directory \
-			output-directory'
-        print '### Types ###'
-        print 'instance-amount : int'
-        print 'input-directory : str'
-        print 'output-directory : str'
-        print 'Example: python parser.py 100 data-raw/4x16-000/test/ data-processed/4x16-000/test/'
+        print ('Usage: python parser.py instance-amount input-directory \
+			output-directory')
+        print ('### Types ###')
+        print ('instance-amount : int')
+        print ('input-directory : str')
+        print ('output-directory : str')
+        print ('Example: python parser.py 100 data-raw/4x16-000/test/ data-processed/4x16-000/test/')
     for i in range(0, instance_amount):
         # The problem's input is accessed (.in file).
         tmp_file = open(input_path + str(i) + training_example_generator.INPUT_SUFFIX, 'r')
@@ -51,28 +51,23 @@ def main():
         solution_vector = [int(s) for s in line.split() if s.isdigit()]
         # The output directory is generated in case if it doesn't exist (view docs).
         generar_jobs.generate_dir(output_path)
-        # A unique .csv file is generated for each of the solution vector's entries.
-        for index, value in enumerate(solution_vector):
-            file_name = output_path + str(index) + '.csv'
-            if is_csv_empty(file_name):
-                # The empty .csv file is created.
-                csvfile = open(file_name, 'wb')
-            else:
-                # Content is added to the existing .csv file (opened with append flag).
-                csvfile = open(file_name, 'a')
-            resultwriter = csv.writer(csvfile, delimiter=',')
-            # lines will be an array with all of the values of the generated file.
-            # The expected tuple will also be added later.
-            lines = []
-            # A column is added for each ETC matrix value.
-            for time_value in etc_matrix:
-                lines.append(time_value)
-            # The task-machine assignment is added.
-            lines.append(value)
-            # The line is added to the .csv file.
-            resultwriter.writerow(lines)
-            csvfile.close()
-    print '.csv files created at ' + output_path
+        # A .csv file is generated
+        import pandas as pd
+        datasetMatrix = []
+        # Generate an array of arrays where each array contains the information for a given task, and its
+        # last element is the associated classification.
+        for j in range(0, task_number):
+            for k in range(0, machine_number): # Add current task information.
+                if (k == 0):
+                    datasetMatrix.append([])
+                datasetMatrix[j].append(etc_matrix[j * machine_number + k])
+            datasetMatrix[j].append(solution_vector[j]) # Add classification.
+        # Generate dataframe and print to csv.
+        dataset = pd.DataFrame()
+        dataset = dataset.append(pd.DataFrame(datasetMatrix), ignore_index=True)
+        file_name = output_path + str(i) + '.csv'
+        dataset.to_csv(file_name, sep=',', encoding='utf-8', index=False, header=False)
+    print ('.csv files created at ' + output_path)
 
 def is_csv_empty(file_name):
     '''
