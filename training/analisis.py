@@ -10,7 +10,7 @@ from sklearn.preprocessing import StandardScaler
 USE_SVM = True
 USE_ANN = True
 CSV_QTY = 5
-task_amount = 3
+task_amount = 128
 no = 1  # Amount of output neurons
 hidden_layer_amount = 2
 split_data_for_manual_tests = False
