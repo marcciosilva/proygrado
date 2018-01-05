@@ -93,8 +93,8 @@ def main():
         # Training file for current classifier
         # TODO make data-processed dir configurable since it's configurable from job generation script.
         baseDir = './data-processed/' + str(task_amount) + 'x' \
-            + str(machine_amount) + '-' + str(task_heterogeneity) \
-            + str(machine_heterogeneity) + str(consistency_type) + '/'
+                  + str(machine_amount) + '-' + str(task_heterogeneity) \
+                  + str(machine_heterogeneity) + str(consistency_type) + '/'
         TRAINING_FILE = baseDir + 'training/' + str(i) + '.csv'
         # Test file for current classifier
         TEST_FILE = baseDir + 'test/' + str(i) + '.csv'
@@ -108,7 +108,7 @@ def main():
         # If not using entire ETC,use only the column relevant to the task/classifier.
         if not USING_ENTIRE_ETC:
             df_training_input = df_training_input.iloc[:, i *
-                                                       machine_amount: i * machine_amount + machine_amount]
+                                                          machine_amount: i * machine_amount + machine_amount]
         df_training_output = df_training.iloc[:, -1]
 
         # Validation/testing data is loaded.
@@ -117,7 +117,7 @@ def main():
         # If not using entire ETC,use only the column relevant to the task/classifier.
         if not USING_ENTIRE_ETC:
             df_test_input = df_test_input.iloc[:, i *
-                                               machine_amount: i * machine_amount + machine_amount]
+                                                  machine_amount: i * machine_amount + machine_amount]
         df_test_output = df_test.iloc[:, -1]
         if SCALE_DATA:
             # Scale data because http://scikit-learn.org/stable/modules/neural_networks_supervised.html#tips-on-practical-use
@@ -133,9 +133,10 @@ def main():
             # Scale test data.
             df_test_input = pd.DataFrame(scaler.transform(df_test_input))
         if USE_PIPELINE:
-            for i in range(0,128):
-                pipelines.append(Pipeline([ ('StandardScaler', StandardScaler()),('pca', PCA(n_components == 'mle' and svd_solver)), ('classify', classifiers[i]) ]))
-
+            for i in range(0, 128):
+                pipelines.append(Pipeline(
+                    [('StandardScaler', StandardScaler()), ('pca', PCA(n_components == 'mle' and svd_solver)),
+                     ('classify', classifiers[i])]))
 
         if chosen_classifier == CLASSIFIER_STRING_SVM:
             if USE_PARAMETER_SELECTION:
@@ -195,7 +196,6 @@ def main():
                     prediction_pandas = float(classifiers[i].predict(
                         etc_matrix_scaled.values.reshape(1, -1)))
 
-
                 results.append(prediction_pandas)
                 prediction = float(prediction_pandas)  # To work in floats.
 
@@ -225,7 +225,7 @@ def main():
                 # trained using scaled data)
                 # Non-scaled data is used to calculate real makespan, using the original units of the problem.
                 sub_row_for_current_task = df_test.iloc[:, :-1].iloc[j,
-                                                                     i * machine_amount: i * machine_amount + machine_amount]
+                                           i * machine_amount: i * machine_amount + machine_amount]
                 classification_heuristic = float(df_test_output[j])
                 # Every test example is classified, and its classification is appended
                 # to a results array.
@@ -301,7 +301,7 @@ def main():
         average_accuracy += accuracy_scores[i]
     average_accuracy /= score_amount
     if (DEBUG_MODE):
-        print ('The average accuracy is {}'.format(average_accuracy))
+        print('The average accuracy is {}'.format(average_accuracy))
     print('{}#{}#{}'.format(avg_difference_between_methods, str(end - start), average_accuracy))
 
 
@@ -314,8 +314,8 @@ def create_or_load_classifiers(chosen_classifier):
     # Base path for classifier persistence.
     # TODO maybe make ./models/ dir configurable.
     model_base_path = './models/' + chosen_classifier + '/' + str(task_amount) + 'x' + str(machine_amount) \
-        + '-' + str(task_heterogeneity) + str(machine_heterogeneity) \
-        + str(consistency_type) + '/'
+                      + '-' + str(task_heterogeneity) + str(machine_heterogeneity) \
+                      + str(consistency_type) + '/'
     if chosen_classifier == CLASSIFIER_STRING_ANN:
         if USING_ENTIRE_ETC:
             dimension = task_amount * machine_amount
@@ -367,11 +367,13 @@ def create_or_load_classifiers(chosen_classifier):
             classifiers.append(classifier)
     return model_base_path
 
+
 def getModelPathStr(model_base_path, chosen_classifier, classifier_index):
     '''
     Returns a string with the path where models live.
     '''
     return model_base_path + MODEL_FILE_PREFIX + chosen_classifier + str(classifier_index) + MODEL_FILE_EXTENSION
+
 
 # TODO move the following to some utils module.
 
@@ -379,9 +381,11 @@ def getModelPathStr(model_base_path, chosen_classifier, classifier_index):
 def blockPrint():
     sys.stdout = open(os.devnull, 'w')
 
+
 # Restore
 def enablePrint():
     sys.stdout = sys.__stdout__
+
 
 if __name__ == "__main__":
     main()

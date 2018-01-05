@@ -11,6 +11,7 @@ import sys
 import training_example_generator
 import generar_jobs
 
+
 def main():
     # The .in and .out files' location is obtained from the user input.
     try:
@@ -18,13 +19,13 @@ def main():
         input_path = str(sys.argv[2])
         output_path = str(sys.argv[3])
     except Exception:
-        print ('Usage: python parser.py instance-amount input-directory \
+        print('Usage: python parser.py instance-amount input-directory \
 			output-directory')
-        print ('### Types ###')
-        print ('instance-amount : int')
-        print ('input-directory : str')
-        print ('output-directory : str')
-        print ('Example: python parser.py 100 data-raw/4x16-000/test/ data-processed/4x16-000/test/')
+        print('### Types ###')
+        print('instance-amount : int')
+        print('input-directory : str')
+        print('output-directory : str')
+        print('Example: python parser.py 100 data-raw/4x16-000/test/ data-processed/4x16-000/test/')
     for i in range(0, instance_amount):
         # The problem's input is accessed (.in file).
         tmp_file = open(input_path + str(i) + training_example_generator.INPUT_SUFFIX, 'r')
@@ -57,17 +58,18 @@ def main():
         # Generate an array of arrays where each array contains the information for a given task, and its
         # last element is the associated classification.
         for j in range(0, task_number):
-            for k in range(0, machine_number): # Add current task information.
+            for k in range(0, machine_number):  # Add current task information.
                 if (k == 0):
                     datasetMatrix.append([])
                 datasetMatrix[j].append(etc_matrix[j * machine_number + k])
-            datasetMatrix[j].append(solution_vector[j]) # Add classification.
+            datasetMatrix[j].append(solution_vector[j])  # Add classification.
         # Generate dataframe and print to csv.
         dataset = pd.DataFrame()
         dataset = dataset.append(pd.DataFrame(datasetMatrix), ignore_index=True)
         file_name = output_path + str(i) + '.csv'
         dataset.to_csv(file_name, sep=',', encoding='utf-8', index=False, header=False)
-    print ('.csv files created at ' + output_path)
+    print('.csv files created at ' + output_path)
+
 
 def is_csv_empty(file_name):
     '''
@@ -78,6 +80,7 @@ def is_csv_empty(file_name):
             return False
     except IOError:
         return True
+
 
 if __name__ == "__main__":
     main()
