@@ -15,8 +15,9 @@ def make_cross_validation():
     # Run cross validation with pipeline and target data.
     scores = cross_val_score(pipeline_classifier, training_and_testing_sets_dataframe, target_column, cv=5)
     save_results_to_file(pipeline_classifier, scores)
+    # Train the classifier and persist it.
+    pipeline_classifier = train_classifier(pipeline_classifier,training_and_testing_sets_dataframe,target_column)
     persist_classifier(pipeline_classifier)
-
 
 def get_training_and_testing_sets_dataframe():
     # Each csv includes 128 tasks (ie training instances).
@@ -73,6 +74,10 @@ def save_results_to_file(pipeline, scores):
 
 def persist_classifier(pipeline_classifier):
     joblib.dump(pipeline_classifier, 'classifier.pkl')
+
+def train_classifier(pipeline_classifier,training_data,target_to_learn):
+    pipeline_classifier.fit(training_data,target_to_learn)
+    return pipeline_classifier
 
 
 make_cross_validation()

@@ -122,3 +122,6 @@ ENV/
 # training custom folder
 training/*.csv
 training/*.out
+
+# Muro's virtualenv folder
+proyecto-env/
