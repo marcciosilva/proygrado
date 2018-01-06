@@ -14,10 +14,10 @@ def make_cross_validation():
     # Save to CSV just in case.
     training_testing.to_csv("variable.csv",sep=',',index=False,header=False)
     target = remove_target_column_from_dataframe(training_testing)
-    pipeline = create_pipeline_classifier()
+    pipeline_classifier = create_pipeline_classifier()
     # Run cross validation with pipeline and target data.
-    scores = cross_val_score(pipeline, training_testing, target, cv=5)
-    save_results_to_file(pipeline, scores)
+    scores = cross_val_score(pipeline_classifier, training_testing, target, cv=5)
+    save_results_to_file(pipeline_classifier, scores)
 
 def load_csv_data(amount_of_problem_instance_csvs_to_use):
     data = []
@@ -34,11 +34,9 @@ def remove_target_column_from_dataframe(training_testing):
 
 def create_pipeline_classifier():
     classifier = create_neural_network_classifier()
-    # generlo el pipeline con el escalado y el clasificador:
-    pipeline = Pipeline([ ('StandardScaler', StandardScaler()), ('classify',classifier) ])
-    # pipa se entiende como un nuevo clasificador formado por el preprocesamiento de escalado y un clasificador ANN
-    # pipa puede ser tratado como si fuera un clasificador pelado.
-    return pipeline
+    # Apply scaler to classifier to get new classifier.
+    pipeline_classifier = Pipeline([ ('StandardScaler', StandardScaler()), ('classify',classifier) ])
+    return pipeline_classifier
 
 def create_neural_network_classifier():
     task_amount = 128
