@@ -8,6 +8,7 @@ ejemplos*/
 data*/
 *.log
 models/
+*.pkl
 
 # Pycharm
 .idea/

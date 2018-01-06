@@ -5,6 +5,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.neural_network import MLPClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
+from sklearn.externals import joblib
 
 
 def make_cross_validation():
@@ -14,6 +15,7 @@ def make_cross_validation():
     # Run cross validation with pipeline and target data.
     scores = cross_val_score(pipeline_classifier, training_and_testing_sets_dataframe, target_column, cv=5)
     save_results_to_file(pipeline_classifier, scores)
+    persist_classifier(pipeline_classifier)
 
 
 def get_training_and_testing_sets_dataframe():
@@ -68,6 +70,10 @@ def save_results_to_file(pipeline, scores):
     f.write(str(pipeline.get_params()) + '\n')
     f.write("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2) + '\n')
     f.close()
+
+
+def persist_classifier(pipeline_classifier):
+    joblib.dump(pipeline_classifier, 'classifier.pkl')
 
 
 make_cross_validation()
