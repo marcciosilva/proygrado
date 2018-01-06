@@ -6,37 +6,42 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
+
 def make_cross_validation():
     # Each csv includes 128 tasks (ie training instances).
     amount_of_problem_instance_csvs_to_use = 10
     split_data_for_manual_tests = False
     training_testing = load_csv_data(amount_of_problem_instance_csvs_to_use)
     # Save to CSV just in case.
-    training_testing.to_csv("variable.csv",sep=',',index=False,header=False)
+    training_testing.to_csv("variable.csv", sep=',', index=False, header=False)
     target = remove_target_column_from_dataframe(training_testing)
     pipeline_classifier = create_pipeline_classifier()
     # Run cross validation with pipeline and target data.
     scores = cross_val_score(pipeline_classifier, training_testing, target, cv=5)
     save_results_to_file(pipeline_classifier, scores)
 
+
 def load_csv_data(amount_of_problem_instance_csvs_to_use):
     data = []
     # Each file includes an ETC matrix and the output vector.
-    for i in range(0,amount_of_problem_instance_csvs_to_use):
+    for i in range(0, amount_of_problem_instance_csvs_to_use):
         data.append(pandas.read_csv(str(i) + ".csv", header=None, delimiter=','))
         training_testing = pandas.concat(data, ignore_index=True)
     return training_testing
 
+
 def remove_target_column_from_dataframe(training_testing):
-    target = training_testing.iloc[:,-1]
-    del training_testing[len(training_testing.columns) -1]
+    target = training_testing.iloc[:, -1]
+    del training_testing[len(training_testing.columns) - 1]
     return target
+
 
 def create_pipeline_classifier():
     classifier = create_neural_network_classifier()
     # Apply scaler to classifier to get new classifier.
-    pipeline_classifier = Pipeline([ ('StandardScaler', StandardScaler()), ('classify',classifier) ])
+    pipeline_classifier = Pipeline([('StandardScaler', StandardScaler()), ('classify', classifier)])
     return pipeline_classifier
+
 
 def create_neural_network_classifier():
     task_amount = 128
@@ -49,6 +54,7 @@ def create_neural_network_classifier():
                                hidden_layer_sizes=hidden_layer_neuron_amount, random_state=1)
     return classifier
 
+
 def save_results_to_file(pipeline, scores):
     # In case it's running unattended and not in AWS terminal.
     f = open('results.out', 'a')
@@ -57,5 +63,6 @@ def save_results_to_file(pipeline, scores):
     f.write(str(pipeline.get_params()) + '\n')
     f.write("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2) + '\n')
     f.close()
+
 
 make_cross_validation()
