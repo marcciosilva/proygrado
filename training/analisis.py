@@ -33,8 +33,7 @@ def load_csv_data_as_dataframe(amount_of_problem_instance_csvs_to_use):
     # Each file includes an ETC matrix and the output vector.
     for i in range(0, amount_of_problem_instance_csvs_to_use):
         data.append(pandas.read_csv(str(i) + ".csv", header=None, delimiter=','))
-        training_testing = pandas.concat(data, ignore_index=True)
-    return training_testing
+    return pandas.concat(data, ignore_index=True)
 
 
 def remove_target_column_from_dataframe(training_testing):
