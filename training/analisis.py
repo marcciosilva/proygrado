@@ -1,6 +1,6 @@
 import math
+
 import pandas
-from sklearn.decomposition import PCA
 from sklearn.model_selection import cross_val_score
 from sklearn.neural_network import MLPClassifier
 from sklearn.pipeline import Pipeline
@@ -8,20 +8,25 @@ from sklearn.preprocessing import StandardScaler
 
 
 def make_cross_validation():
-    # Each csv includes 128 tasks (ie training instances).
-    amount_of_problem_instance_csvs_to_use = 10
-    split_data_for_manual_tests = False
-    training_testing = load_csv_data(amount_of_problem_instance_csvs_to_use)
-    # Save to CSV just in case.
-    training_testing.to_csv("variable.csv", sep=',', index=False, header=False)
-    target = remove_target_column_from_dataframe(training_testing)
+    training_and_testing_sets_dataframe = get_training_and_testing_sets_dataframe()
+    target_column = remove_target_column_from_dataframe(training_and_testing_sets_dataframe)
     pipeline_classifier = create_pipeline_classifier()
     # Run cross validation with pipeline and target data.
-    scores = cross_val_score(pipeline_classifier, training_testing, target, cv=5)
+    scores = cross_val_score(pipeline_classifier, training_and_testing_sets_dataframe, target_column, cv=5)
     save_results_to_file(pipeline_classifier, scores)
 
 
-def load_csv_data(amount_of_problem_instance_csvs_to_use):
+def get_training_and_testing_sets_dataframe():
+    # Each csv includes 128 tasks (ie training instances).
+    amount_of_problem_instance_csvs_to_use = 10
+    split_data_for_manual_tests = False
+    training_and_testing_sets_dataframe = load_csv_data_as_dataframe(amount_of_problem_instance_csvs_to_use)
+    # Save to CSV just in case.
+    training_and_testing_sets_dataframe.to_csv("variable.csv", sep=',', index=False, header=False)
+    return training_and_testing_sets_dataframe
+
+
+def load_csv_data_as_dataframe(amount_of_problem_instance_csvs_to_use):
     data = []
     # Each file includes an ETC matrix and the output vector.
     for i in range(0, amount_of_problem_instance_csvs_to_use):
