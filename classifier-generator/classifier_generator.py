@@ -1,4 +1,6 @@
 import math
+import pdb
+import sys
 
 import pandas
 from sklearn.externals import joblib
@@ -9,6 +11,8 @@ from sklearn.preprocessing import StandardScaler
 
 training_examples_base_dir = 'examples/'
 module_name = ''
+machine_amount = 4  # TODO receive as parameter.
+task_amount = 128  # TODO receive as parameter.
 
 
 def create_train_and_persist_classifier():
@@ -34,10 +38,27 @@ def get_training_and_testing_sets_dataframe():
     amount_of_problem_instance_csvs_to_use = 10
     split_data_for_manual_tests = False
     training_and_testing_sets_dataframe = load_csv_data_as_dataframe(amount_of_problem_instance_csvs_to_use)
+    makespan = get_makespan_for_examples_dataframe(training_and_testing_sets_dataframe)
     # Save to CSV just in case.
     training_and_testing_sets_dataframe.to_csv(module_name + "_dataframe_backup.csv", sep=',', index=False,
                                                header=False)
     return training_and_testing_sets_dataframe
+
+
+# TODO move utility to wherever it makes sense (in problem_instance_classifier.py).
+def get_makespan_for_examples_dataframe(training_and_testing_sets_dataframe):
+    makespan = 0.0
+    try:
+        for current_training_instance in range(0, len(training_and_testing_sets_dataframe)):
+            # If machine_amount == 4, access 5th column ie 4th index.
+            current_row = training_and_testing_sets_dataframe.loc[current_training_instance]
+            assigned_machine_for_task = current_row[machine_amount]
+            # TODO ver que onda con los indices de maquina que se van de rango
+            makespan += current_row[assigned_machine_for_task]
+        return makespan
+    except Exception:
+        type, value, traceback = sys.exc_info()
+        pdb.set_trace()
 
 
 def load_csv_data_as_dataframe(amount_of_problem_instance_csvs_to_use):
@@ -62,7 +83,6 @@ def create_pipeline_classifier():
 
 
 def create_neural_network_classifier():
-    task_amount = 128
     output_neuron_amount = 1
     hidden_layer_amount = 2
     # Same heuristic as before to calculate neuron amount in inner layers.
