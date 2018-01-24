@@ -36,3 +36,193 @@ Accuracy: 0.82 (+/- 0.05)
        solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
        warm_start=False))], 'classify__learning_rate': 'constant', 'classify__max_iter': 200}
 Accuracy: 0.82 (+/- 0.05)
+
+
+###################################################
+###################################################
+
+{'classify__nesterovs_momentum': True, 'classify__tol': 0.0001, 'classify__beta_2': 0.999, 'classify__beta_1': 0.9, 'classify__random_state': 1, 'classify__epsilon': 1e-08, 'classify__batch_size': 'auto', 'classify__alpha': 0.01, 'classify__momentum': 0.9, 'classify__power_t': 0.5, 'StandardScaler__copy': True, 'classify__shuffle': True, 'classify__hidden_layer_sizes': (63, 63), 'classify__learning_rate_init': 0.001, 'classify__verbose': False, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify': MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(63, 63), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
+       solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
+       warm_start=False), 'classify__early_stopping': False, 'StandardScaler__with_mean': True, 'classify__solver': 'lbfgs', 'StandardScaler__with_std': True, 'classify__activation': 'relu', 'classify__validation_fraction': 0.1, 'classify__warm_start': False, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(63, 63), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
+       solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
+       warm_start=False))], 'classify__learning_rate': 'constant', 'classify__max_iter': 200}
+Accuracy: 0.82 (+/- 0.05)
+
+
+###################################################
+###################################################
+
+{'classify__nesterovs_momentum': True, 'classify__tol': 0.0001, 'classify__beta_2': 0.999, 'classify__beta_1': 0.9, 'classify__random_state': 1, 'classify__epsilon': 1e-08, 'classify__batch_size': 'auto', 'classify__alpha': 0.01, 'classify__momentum': 0.9, 'classify__power_t': 0.5, 'StandardScaler__copy': True, 'classify__shuffle': True, 'classify__hidden_layer_sizes': (63, 63), 'classify__learning_rate_init': 0.001, 'classify__verbose': False, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify': MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(63, 63), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
+       solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
+       warm_start=False), 'classify__early_stopping': False, 'StandardScaler__with_mean': True, 'classify__solver': 'lbfgs', 'StandardScaler__with_std': True, 'classify__activation': 'relu', 'classify__validation_fraction': 0.1, 'classify__warm_start': False, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(63, 63), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
+       solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
+       warm_start=False))], 'classify__learning_rate': 'constant', 'classify__max_iter': 200}
+Accuracy: 0.82 (+/- 0.05)
+
+
+###################################################
+###################################################
+
+{'classify__nesterovs_momentum': True, 'classify__tol': 0.0001, 'classify__beta_2': 0.999, 'classify__beta_1': 0.9, 'classify__random_state': 1, 'classify__epsilon': 1e-08, 'classify__batch_size': 'auto', 'classify__alpha': 0.01, 'classify__momentum': 0.9, 'classify__power_t': 0.5, 'StandardScaler__copy': True, 'classify__shuffle': True, 'classify__hidden_layer_sizes': (63, 63, 63, 63), 'classify__learning_rate_init': 0.001, 'classify__verbose': False, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify': MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(63, 63, 63, 63), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
+       solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
+       warm_start=False), 'classify__early_stopping': False, 'StandardScaler__with_mean': True, 'classify__solver': 'lbfgs', 'StandardScaler__with_std': True, 'classify__activation': 'relu', 'classify__validation_fraction': 0.1, 'classify__warm_start': False, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(63, 63, 63, 63), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
+       solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
+       warm_start=False))], 'classify__learning_rate': 'constant', 'classify__max_iter': 200}
+Accuracy: 0.82 (+/- 0.05)
+
+
+###################################################
+###################################################
+
+{'classify__nesterovs_momentum': True, 'classify__tol': 0.0001, 'classify__beta_2': 0.999, 'classify__beta_1': 0.9, 'classify__random_state': 1, 'classify__epsilon': 1e-08, 'classify__batch_size': 'auto', 'classify__alpha': 0.01, 'classify__momentum': 0.9, 'classify__power_t': 0.5, 'StandardScaler__copy': True, 'classify__shuffle': True, 'classify__hidden_layer_sizes': (63, 63, 63), 'classify__learning_rate_init': 0.001, 'classify__verbose': False, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify': MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(63, 63, 63), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
+       solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
+       warm_start=False), 'classify__early_stopping': False, 'StandardScaler__with_mean': True, 'classify__solver': 'lbfgs', 'StandardScaler__with_std': True, 'classify__activation': 'relu', 'classify__validation_fraction': 0.1, 'classify__warm_start': False, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(63, 63, 63), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
+       solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
+       warm_start=False))], 'classify__learning_rate': 'constant', 'classify__max_iter': 200}
+Accuracy: 0.83 (+/- 0.04)
+
+
+###################################################
+###################################################
+
+{'classify__nesterovs_momentum': True, 'classify__tol': 0.0001, 'classify__beta_2': 0.999, 'classify__beta_1': 0.9, 'classify__random_state': 1, 'classify__epsilon': 1e-08, 'classify__batch_size': 'auto', 'classify__alpha': 0.01, 'classify__momentum': 0.9, 'classify__power_t': 0.5, 'StandardScaler__copy': True, 'classify__shuffle': True, 'classify__hidden_layer_sizes': (63, 63, 63), 'classify__learning_rate_init': 0.001, 'classify__verbose': False, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify': MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(63, 63, 63), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
+       solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
+       warm_start=False), 'classify__early_stopping': False, 'StandardScaler__with_mean': True, 'classify__solver': 'lbfgs', 'StandardScaler__with_std': True, 'classify__activation': 'relu', 'classify__validation_fraction': 0.1, 'classify__warm_start': False, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(63, 63, 63), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
+       solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
+       warm_start=False))], 'classify__learning_rate': 'constant', 'classify__max_iter': 200}
+Accuracy: 0.83 (+/- 0.04)
+
+
+###################################################
+###################################################
+
+{'classify__nesterovs_momentum': True, 'classify__tol': 0.0001, 'classify__beta_2': 0.999, 'classify__beta_1': 0.9, 'classify__random_state': 1, 'classify__epsilon': 1e-08, 'classify__batch_size': 'auto', 'classify__alpha': 0.01, 'classify__momentum': 0.9, 'classify__power_t': 0.5, 'StandardScaler__copy': True, 'classify__shuffle': True, 'classify__hidden_layer_sizes': (63, 63, 63), 'classify__learning_rate_init': 0.001, 'classify__verbose': False, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify': MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(63, 63, 63), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
+       solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
+       warm_start=False), 'classify__early_stopping': False, 'StandardScaler__with_mean': True, 'classify__solver': 'lbfgs', 'StandardScaler__with_std': True, 'classify__activation': 'relu', 'classify__validation_fraction': 0.1, 'classify__warm_start': False, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(63, 63, 63), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
+       solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
+       warm_start=False))], 'classify__learning_rate': 'constant', 'classify__max_iter': 200}
+Accuracy: 0.83 (+/- 0.04)
+
+
+###################################################
+###################################################
+
+{'classify__nesterovs_momentum': True, 'classify__tol': 0.0001, 'classify__beta_2': 0.999, 'classify__beta_1': 0.9, 'classify__random_state': 1, 'classify__epsilon': 1e-08, 'classify__batch_size': 'auto', 'classify__alpha': 0.01, 'classify__momentum': 0.9, 'classify__power_t': 0.5, 'StandardScaler__copy': True, 'classify__shuffle': True, 'classify__hidden_layer_sizes': (63, 63, 63, 63, 63, 63), 'classify__learning_rate_init': 0.001, 'classify__verbose': False, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify': MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(63, 63, 63, 63, 63, 63),
+       learning_rate='constant', learning_rate_init=0.001, max_iter=200,
+       momentum=0.9, nesterovs_momentum=True, power_t=0.5, random_state=1,
+       shuffle=True, solver='lbfgs', tol=0.0001, validation_fraction=0.1,
+       verbose=False, warm_start=False), 'classify__early_stopping': False, 'StandardScaler__with_mean': True, 'classify__solver': 'lbfgs', 'StandardScaler__with_std': True, 'classify__activation': 'relu', 'classify__validation_fraction': 0.1, 'classify__warm_start': False, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(63, 63, 63, 63, 63, 63),
+       learning_rate='constant', learning_rate_init=0.001, max_iter=200,
+       momentum=0.9, nesterovs_momentum=True, power_t=0.5, random_state=1,
+       shuffle=True, solver='lbfgs', tol=0.0001, validation_fraction=0.1,
+       verbose=False, warm_start=False))], 'classify__learning_rate': 'constant', 'classify__max_iter': 200}
+Accuracy: 0.82 (+/- 0.05)
+
+
+###################################################
+###################################################
+
+{'classify__nesterovs_momentum': True, 'classify__tol': 0.0001, 'classify__beta_2': 0.999, 'classify__beta_1': 0.9, 'classify__random_state': 1, 'classify__epsilon': 1e-08, 'classify__batch_size': 'auto', 'classify__alpha': 0.01, 'classify__momentum': 0.9, 'classify__power_t': 0.5, 'StandardScaler__copy': True, 'classify__shuffle': True, 'classify__hidden_layer_sizes': 128, 'classify__learning_rate_init': 0.001, 'classify__verbose': False, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify': MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=128, learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
+       solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
+       warm_start=False), 'classify__early_stopping': False, 'StandardScaler__with_mean': True, 'classify__solver': 'lbfgs', 'StandardScaler__with_std': True, 'classify__activation': 'relu', 'classify__validation_fraction': 0.1, 'classify__warm_start': False, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=128, learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
+       solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
+       warm_start=False))], 'classify__learning_rate': 'constant', 'classify__max_iter': 200}
+Accuracy: 0.82 (+/- 0.04)
+
+
+###################################################
+###################################################
+
+{'classify__nesterovs_momentum': True, 'classify__tol': 0.0001, 'classify__beta_2': 0.999, 'classify__beta_1': 0.9, 'classify__random_state': 1, 'classify__epsilon': 1e-08, 'classify__batch_size': 'auto', 'classify__alpha': 0.01, 'classify__momentum': 0.9, 'classify__power_t': 0.5, 'StandardScaler__copy': True, 'classify__shuffle': True, 'classify__hidden_layer_sizes': 128, 'classify__learning_rate_init': 0.001, 'classify__verbose': False, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify': MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=128, learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
+       solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
+       warm_start=False), 'classify__early_stopping': False, 'StandardScaler__with_mean': True, 'classify__solver': 'lbfgs', 'StandardScaler__with_std': True, 'classify__activation': 'relu', 'classify__validation_fraction': 0.1, 'classify__warm_start': False, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=128, learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
+       solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
+       warm_start=False))], 'classify__learning_rate': 'constant', 'classify__max_iter': 200}
+Accuracy: 0.83 (+/- 0.01)
+
+
+###################################################
+###################################################
+
+{'memory': None, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(128, 128), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
+       solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
+       warm_start=False))], 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify': MLPClassifier(activation='relu', alpha=0.01, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(128, 128), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
+       solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
+       warm_start=False), 'StandardScaler__copy': True, 'StandardScaler__with_mean': True, 'StandardScaler__with_std': True, 'classify__activation': 'relu', 'classify__alpha': 0.01, 'classify__batch_size': 'auto', 'classify__beta_1': 0.9, 'classify__beta_2': 0.999, 'classify__early_stopping': False, 'classify__epsilon': 1e-08, 'classify__hidden_layer_sizes': (128, 128), 'classify__learning_rate': 'constant', 'classify__learning_rate_init': 0.001, 'classify__max_iter': 200, 'classify__momentum': 0.9, 'classify__nesterovs_momentum': True, 'classify__power_t': 0.5, 'classify__random_state': 1, 'classify__shuffle': True, 'classify__solver': 'lbfgs', 'classify__tol': 0.0001, 'classify__validation_fraction': 0.1, 'classify__verbose': False, 'classify__warm_start': False}
+Accuracy: 0.84 (+/- 0.01)

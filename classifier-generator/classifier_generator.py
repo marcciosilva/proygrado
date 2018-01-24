@@ -83,13 +83,17 @@ def create_pipeline_classifier():
 
 
 def create_neural_network_classifier():
-    output_neuron_amount = 1
-    hidden_layer_amount = 2
     # Same heuristic as before to calculate neuron amount in inner layers.
-    hidden_layer_neuron_amount = tuple([int(math.ceil((task_amount - output_neuron_amount) / 2))]
-                                       * hidden_layer_amount)
+    hidden_layer_amount = 2
+    problem_instance_amount = 10
+    training_instance_amount = problem_instance_amount * task_amount
+    input_neuron_amount = machine_amount
+    output_neuron_amount = 1
+    alpha = 2
+    hidden_layer_neuron_amount = training_instance_amount / (alpha * (input_neuron_amount + output_neuron_amount))
+    hidden_layers = tuple([int(math.ceil(hidden_layer_neuron_amount))] * hidden_layer_amount)
     classifier = MLPClassifier(solver='lbfgs', alpha=1e-2,
-                               hidden_layer_sizes=hidden_layer_neuron_amount, random_state=1)
+                               hidden_layer_sizes=hidden_layers, random_state=1)
     return classifier
 
 
@@ -100,6 +104,7 @@ def save_results_to_file(pipeline, scores):
     f.write("###################################################" + '\n\n')
     f.write(str(pipeline.get_params()) + '\n')
     f.write("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2) + '\n')
+    print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2) + '\n')
     f.close()
 
 
