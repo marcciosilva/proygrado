@@ -22,7 +22,7 @@ PARSER_DIR = 'data-processed/'
 # contained in a single job.
 JOB_AMOUNT = 1  # TODO make this not matter when serial data generation is used.
 # Amount of test instances to use, and amount of training instances to use (respectively).
-TEST_TRAINING_AMOUNT = [100, 600]
+TEST_TRAINING_AMOUNT = [0, 1]
 # Types of problems, where the key refers to the task amount, and the value refers to the
 # machine amount.
 PROBLEM_TYPES = {128: 4}  # , 512: 16}
