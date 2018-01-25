@@ -3,7 +3,9 @@ import pdb
 import sys
 
 import pandas
+import numpy
 from sklearn.externals import joblib
+from sklearn import svm
 from sklearn.model_selection import cross_val_score
 from sklearn.neural_network import MLPClassifier
 from sklearn.pipeline import Pipeline
@@ -19,13 +21,13 @@ def create_train_and_persist_classifier():
     initialize_instance_variables()
     training_and_testing_sets_dataframe = get_training_and_testing_sets_dataframe()
     target_column = remove_target_column_from_dataframe(training_and_testing_sets_dataframe)
-    pipeline_classifier = create_pipeline_classifier()
+    pipeline_classifier = create_pipeline_classifier('SVM')
     # Run cross validation with pipeline and target data.
     scores = cross_val_score(pipeline_classifier, training_and_testing_sets_dataframe, target_column, cv=5)
     save_results_to_file(pipeline_classifier, scores)
     # Train the classifier and persist it.
-    pipeline_classifier = train_classifier(pipeline_classifier, training_and_testing_sets_dataframe, target_column)
-    persist_classifier(pipeline_classifier)
+    #pipeline_classifier = train_classifier(pipeline_classifier, training_and_testing_sets_dataframe, target_column)
+    #persist_classifier(pipeline_classifier)
 
 
 def initialize_instance_variables():
@@ -35,7 +37,7 @@ def initialize_instance_variables():
 
 def get_training_and_testing_sets_dataframe():
     # Each csv includes 128 tasks (ie training instances).
-    amount_of_problem_instance_csvs_to_use = 10
+    amount_of_problem_instance_csvs_to_use = problem_instance_amount
     split_data_for_manual_tests = False
     training_and_testing_sets_dataframe = load_csv_data_as_dataframe(amount_of_problem_instance_csvs_to_use)
     makespan = get_makespan_for_examples_dataframe(training_and_testing_sets_dataframe)
@@ -75,8 +77,11 @@ def remove_target_column_from_dataframe(training_testing):
     return target
 
 
-def create_pipeline_classifier():
-    classifier = create_neural_network_classifier()
+def create_pipeline_classifier(type):
+    if type == 'ANN':
+        classifier = create_neural_network_classifier()
+    elif type == 'SVM':
+        classifier = svm.SVC()
     # Apply scaler to classifier to get new classifier.
     pipeline_classifier = Pipeline([('StandardScaler', StandardScaler()), ('classify', classifier)])
     return pipeline_classifier
@@ -85,7 +90,7 @@ def create_pipeline_classifier():
 def create_neural_network_classifier():
     # Same heuristic as before to calculate neuron amount in inner layers.
     hidden_layer_amount = 2
-    problem_instance_amount = 10
+    
     training_instance_amount = problem_instance_amount * task_amount
     input_neuron_amount = machine_amount
     output_neuron_amount = 1
@@ -99,13 +104,15 @@ def create_neural_network_classifier():
 
 def save_results_to_file(pipeline, scores):
     # In case it's running unattended and not in AWS terminal.
-    f = open(module_name + '_results.out', 'a')
-    f.write('\n\n' + "###################################################" + '\n')
-    f.write("###################################################" + '\n\n')
-    f.write(str(pipeline.get_params()) + '\n')
-    f.write("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2) + '\n')
-    print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2) + '\n')
-    f.close()
+    #f = open(module_name + '_results.out', 'a')
+    #f.write('\n\n' + "###################################################" + '\n')
+    #f.write("###################################################" + '\n\n')
+    #f.write(str(pipeline.get_params()) + '\n')
+    #f.write("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2) + '\n')
+    #print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2) + '\n')
+    print(str(scores.mean()) + " " + str(problem_instance_amount * task_amount))
+    #print("Training examples: " + str(problem_instance_amount * task_amount) + " This is: " + str(task_amount) + " tasks and " + str(problem_instance_amount) +" problem instances.")
+    #f.close()
 
 
 def persist_classifier(pipeline_classifier):
@@ -116,5 +123,7 @@ def train_classifier(pipeline_classifier, training_data, target_to_learn):
     pipeline_classifier.fit(training_data, target_to_learn)
     return pipeline_classifier
 
-
-create_train_and_persist_classifier()
+problem_instance_amount = 10
+elements = list(numpy.arange(10, 100, 10))
+for problem_instance_amount in elements:
+    create_train_and_persist_classifier()

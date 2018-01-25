@@ -226,3 +226,263 @@ Accuracy: 0.83 (+/- 0.01)
        solver='lbfgs', tol=0.0001, validation_fraction=0.1, verbose=False,
        warm_start=False), 'StandardScaler__copy': True, 'StandardScaler__with_mean': True, 'StandardScaler__with_std': True, 'classify__activation': 'relu', 'classify__alpha': 0.01, 'classify__batch_size': 'auto', 'classify__beta_1': 0.9, 'classify__beta_2': 0.999, 'classify__early_stopping': False, 'classify__epsilon': 1e-08, 'classify__hidden_layer_sizes': (128, 128), 'classify__learning_rate': 'constant', 'classify__learning_rate_init': 0.001, 'classify__max_iter': 200, 'classify__momentum': 0.9, 'classify__nesterovs_momentum': True, 'classify__power_t': 0.5, 'classify__random_state': 1, 'classify__shuffle': True, 'classify__solver': 'lbfgs', 'classify__tol': 0.0001, 'classify__validation_fraction': 0.1, 'classify__verbose': False, 'classify__warm_start': False}
 Accuracy: 0.84 (+/- 0.01)
+
+
+###################################################
+###################################################
+
+{'StandardScaler__copy': True, 'classify__shrinking': True, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'classify__C': 1.0, 'classify__random_state': None, 'classify__tol': 0.001, 'classify__verbose': False, 'classify__degree': 3, 'classify__max_iter': -1, 'classify__probability': False, 'classify__class_weight': None, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify__kernel': 'rbf', 'classify__coef0': 0.0, 'StandardScaler__with_mean': True, 'StandardScaler__with_std': True, 'memory': None, 'classify__decision_function_shape': 'ovr', 'classify__gamma': 'auto', 'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'classify__cache_size': 200}
+Accuracy: 0.76 (+/- 0.02)
+
+
+###################################################
+###################################################
+
+{'classify__kernel': 'rbf', 'StandardScaler__with_std': True, 'classify__C': 1.0, 'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'classify__shrinking': True, 'classify__max_iter': -1, 'classify__cache_size': 200, 'classify__coef0': 0.0, 'StandardScaler__copy': True, 'memory': None, 'classify__class_weight': None, 'StandardScaler__with_mean': True, 'classify__tol': 0.001, 'classify__gamma': 'auto', 'classify__probability': False, 'classify__degree': 3, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'classify__decision_function_shape': 'ovr', 'classify__verbose': False, 'classify__random_state': None}
+Accuracy: 0.78 (+/- 0.04)
+
+
+###################################################
+###################################################
+
+{'classify__C': 1.0, 'StandardScaler__with_mean': True, 'classify__gamma': 'auto', 'classify__probability': False, 'classify__verbose': False, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'StandardScaler__copy': True, 'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'classify__class_weight': None, 'classify__cache_size': 200, 'classify__coef0': 0.0, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'classify__kernel': 'rbf', 'classify__max_iter': -1, 'classify__random_state': None, 'memory': None, 'classify__tol': 0.001, 'StandardScaler__with_std': True, 'classify__degree': 3, 'classify__shrinking': True, 'classify__decision_function_shape': 'ovr'}
+Accuracy: 0.79 (+/- 0.01)
+
+
+###################################################
+###################################################
+
+{'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'classify__kernel': 'rbf', 'classify__probability': False, 'classify__verbose': False, 'memory': None, 'classify__degree': 3, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'StandardScaler__copy': True, 'classify__max_iter': -1, 'classify__cache_size': 200, 'classify__random_state': None, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify__decision_function_shape': 'ovr', 'classify__tol': 0.001, 'StandardScaler__with_std': True, 'classify__coef0': 0.0, 'classify__C': 1.0, 'classify__gamma': 'auto', 'StandardScaler__with_mean': True, 'classify__shrinking': True, 'classify__class_weight': None}
+Accuracy: 0.80 (+/- 0.01)
+
+
+###################################################
+###################################################
+
+{'classify__tol': 0.001, 'classify__degree': 3, 'classify__decision_function_shape': 'ovr', 'classify__C': 1.0, 'classify__coef0': 0.0, 'StandardScaler__with_mean': True, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'classify__verbose': False, 'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'classify__cache_size': 200, 'classify__max_iter': -1, 'StandardScaler__with_std': True, 'classify__gamma': 'auto', 'memory': None, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify__kernel': 'rbf', 'StandardScaler__copy': True, 'classify__probability': False, 'classify__class_weight': None, 'classify__shrinking': True, 'classify__random_state': None}
+Accuracy: 0.80 (+/- 0.01)
+
+
+###################################################
+###################################################
+
+{'memory': None, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify__verbose': False, 'classify__tol': 0.001, 'classify__coef0': 0.0, 'classify__degree': 3, 'classify__max_iter': -1, 'classify__cache_size': 200, 'classify__class_weight': None, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'classify__shrinking': True, 'classify__random_state': None, 'StandardScaler__with_mean': True, 'classify__kernel': 'rbf', 'classify__C': 1.0, 'StandardScaler__copy': True, 'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'StandardScaler__with_std': True, 'classify__gamma': 'auto', 'classify__decision_function_shape': 'ovr', 'classify__probability': False}
+Accuracy: 0.80 (+/- 0.02)
+
+
+###################################################
+###################################################
+
+{'classify__gamma': 'auto', 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'classify__probability': False, 'classify__C': 1.0, 'classify__coef0': 0.0, 'classify__tol': 0.001, 'classify__degree': 3, 'StandardScaler__copy': True, 'memory': None, 'classify__shrinking': True, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify__class_weight': None, 'classify__decision_function_shape': 'ovr', 'StandardScaler__with_mean': True, 'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'classify__random_state': None, 'StandardScaler__with_std': True, 'classify__kernel': 'rbf', 'classify__verbose': False, 'classify__cache_size': 200, 'classify__max_iter': -1}
+Accuracy: 0.81 (+/- 0.01)
+
+
+###################################################
+###################################################
+
+{'classify__decision_function_shape': 'ovr', 'classify__shrinking': True, 'classify__verbose': False, 'StandardScaler__copy': True, 'StandardScaler__with_std': True, 'classify__probability': False, 'classify__max_iter': -1, 'memory': None, 'classify__coef0': 0.0, 'classify__tol': 0.001, 'classify__kernel': 'rbf', 'classify__random_state': None, 'classify__gamma': 'auto', 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'classify__cache_size': 200, 'classify__C': 1.0, 'StandardScaler__with_mean': True, 'classify__degree': 3, 'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify__class_weight': None}
+Accuracy: 0.81 (+/- 0.01)
+
+
+###################################################
+###################################################
+
+{'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'classify__class_weight': None, 'StandardScaler__with_mean': True, 'memory': None, 'classify__max_iter': -1, 'classify__decision_function_shape': 'ovr', 'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'classify__C': 1.0, 'classify__tol': 0.001, 'classify__gamma': 'auto', 'classify__probability': False, 'classify__degree': 3, 'classify__kernel': 'rbf', 'classify__cache_size': 200, 'classify__shrinking': True, 'StandardScaler__copy': True, 'classify__random_state': None, 'classify__coef0': 0.0, 'StandardScaler__with_std': True, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify__verbose': False}
+Accuracy: 0.81 (+/- 0.01)
+
+
+###################################################
+###################################################
+
+{'StandardScaler__with_std': True, 'classify__max_iter': -1, 'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify__probability': False, 'classify__verbose': False, 'classify__cache_size': 200, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'classify__coef0': 0.0, 'memory': None, 'StandardScaler__with_mean': True, 'classify__random_state': None, 'classify__gamma': 'auto', 'classify__C': 1.0, 'StandardScaler__copy': True, 'classify__degree': 3, 'classify__decision_function_shape': 'ovr', 'classify__shrinking': True, 'classify__class_weight': None, 'classify__kernel': 'rbf', 'classify__tol': 0.001}
+Accuracy: 0.81 (+/- 0.01)
+
+
+###################################################
+###################################################
+
+{'classify__class_weight': None, 'classify__kernel': 'rbf', 'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'classify__decision_function_shape': 'ovr', 'classify__degree': 3, 'classify__C': 1.0, 'memory': None, 'StandardScaler__with_std': True, 'classify__verbose': False, 'classify__shrinking': True, 'classify__random_state': None, 'classify__max_iter': -1, 'StandardScaler__with_mean': True, 'classify__coef0': 0.0, 'classify__cache_size': 200, 'classify__tol': 0.001, 'StandardScaler__copy': True, 'classify__gamma': 'auto', 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify__probability': False}
+Accuracy: 0.76 (+/- 0.02)
+
+
+###################################################
+###################################################
+
+{'memory': None, 'StandardScaler__with_std': True, 'StandardScaler__with_mean': True, 'classify__gamma': 'auto', 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify__probability': False, 'classify__cache_size': 200, 'classify__verbose': False, 'classify__max_iter': -1, 'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'classify__tol': 0.001, 'classify__decision_function_shape': 'ovr', 'StandardScaler__copy': True, 'classify__C': 1.0, 'classify__shrinking': True, 'classify__kernel': 'rbf', 'classify__coef0': 0.0, 'classify__class_weight': None, 'classify__random_state': None, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'classify__degree': 3}
+Accuracy: 0.76 (+/- 0.02)
+
+
+###################################################
+###################################################
+
+{'StandardScaler__copy': True, 'classify__shrinking': True, 'StandardScaler__with_std': True, 'classify__max_iter': -1, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify__coef0': 0.0, 'classify__degree': 3, 'classify__cache_size': 200, 'classify__class_weight': None, 'StandardScaler__with_mean': True, 'classify__kernel': 'rbf', 'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'classify__tol': 0.001, 'classify__decision_function_shape': 'ovr', 'classify__random_state': None, 'classify__probability': False, 'memory': None, 'classify__verbose': False, 'classify__gamma': 'auto', 'classify__C': 1.0}
+Accuracy: 0.78 (+/- 0.04)
+
+
+###################################################
+###################################################
+
+{'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'StandardScaler__with_std': True, 'classify__C': 1.0, 'StandardScaler__copy': True, 'classify__class_weight': None, 'classify__decision_function_shape': 'ovr', 'classify__gamma': 'auto', 'classify__verbose': False, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify__shrinking': True, 'classify__degree': 3, 'classify__coef0': 0.0, 'classify__tol': 0.001, 'StandardScaler__with_mean': True, 'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'classify__kernel': 'rbf', 'classify__probability': False, 'classify__random_state': None, 'classify__max_iter': -1, 'memory': None, 'classify__cache_size': 200}
+Accuracy: 0.79 (+/- 0.01)
+
+
+###################################################
+###################################################
+
+{'classify__probability': False, 'classify__class_weight': None, 'classify__degree': 3, 'classify__coef0': 0.0, 'classify__random_state': None, 'StandardScaler__copy': True, 'classify__decision_function_shape': 'ovr', 'StandardScaler__with_std': True, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'classify__verbose': False, 'classify__max_iter': -1, 'classify__kernel': 'rbf', 'classify__cache_size': 200, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'memory': None, 'classify__tol': 0.001, 'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'StandardScaler__with_mean': True, 'classify__gamma': 'auto', 'classify__shrinking': True, 'classify__C': 1.0}
+Accuracy: 0.80 (+/- 0.01)
+
+
+###################################################
+###################################################
+
+{'classify__class_weight': None, 'classify__C': 1.0, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'classify__shrinking': True, 'classify__decision_function_shape': 'ovr', 'StandardScaler__with_mean': True, 'classify__max_iter': -1, 'classify__probability': False, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'StandardScaler__with_std': True, 'StandardScaler__copy': True, 'classify__kernel': 'rbf', 'classify__tol': 0.001, 'classify__coef0': 0.0, 'classify__degree': 3, 'classify__gamma': 'auto', 'classify__cache_size': 200, 'classify__random_state': None, 'memory': None, 'classify__verbose': False}
+Accuracy: 0.80 (+/- 0.02)
+
+
+###################################################
+###################################################
+
+{'classify__shrinking': True, 'StandardScaler__with_mean': True, 'StandardScaler__with_std': True, 'memory': None, 'classify__verbose': False, 'classify__degree': 3, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'classify__max_iter': -1, 'classify__probability': False, 'classify__decision_function_shape': 'ovr', 'classify__random_state': None, 'classify__cache_size': 200, 'classify__class_weight': None, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'StandardScaler__copy': True, 'classify__coef0': 0.0, 'classify__C': 1.0, 'classify__kernel': 'rbf', 'classify__tol': 0.001, 'classify__gamma': 'auto'}
+Accuracy: 0.76 (+/- 0.02)
+
+
+###################################################
+###################################################
+
+{'classify__shrinking': True, 'StandardScaler__with_mean': True, 'StandardScaler__with_std': True, 'memory': None, 'classify__verbose': False, 'classify__degree': 3, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'classify__max_iter': -1, 'classify__probability': False, 'classify__decision_function_shape': 'ovr', 'classify__random_state': None, 'classify__cache_size': 200, 'classify__class_weight': None, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'StandardScaler__copy': True, 'classify__coef0': 0.0, 'classify__C': 1.0, 'classify__kernel': 'rbf', 'classify__tol': 0.001, 'classify__gamma': 'auto'}
+Accuracy: 0.78 (+/- 0.04)
+
+
+###################################################
+###################################################
+
+{'classify__shrinking': True, 'StandardScaler__with_mean': True, 'StandardScaler__with_std': True, 'memory': None, 'classify__verbose': False, 'classify__degree': 3, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'classify__max_iter': -1, 'classify__probability': False, 'classify__decision_function_shape': 'ovr', 'classify__random_state': None, 'classify__cache_size': 200, 'classify__class_weight': None, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'StandardScaler__copy': True, 'classify__coef0': 0.0, 'classify__C': 1.0, 'classify__kernel': 'rbf', 'classify__tol': 0.001, 'classify__gamma': 'auto'}
+Accuracy: 0.79 (+/- 0.01)
+
+
+###################################################
+###################################################
+
+{'classify__shrinking': True, 'StandardScaler__with_mean': True, 'StandardScaler__with_std': True, 'memory': None, 'classify__verbose': False, 'classify__degree': 3, 'StandardScaler': StandardScaler(copy=True, with_mean=True, with_std=True), 'classify': SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False), 'classify__max_iter': -1, 'classify__probability': False, 'classify__decision_function_shape': 'ovr', 'classify__random_state': None, 'classify__cache_size': 200, 'classify__class_weight': None, 'steps': [('StandardScaler', StandardScaler(copy=True, with_mean=True, with_std=True)), ('classify', SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))], 'StandardScaler__copy': True, 'classify__coef0': 0.0, 'classify__C': 1.0, 'classify__kernel': 'rbf', 'classify__tol': 0.001, 'classify__gamma': 'auto'}
+Accuracy: 0.80 (+/- 0.01)
