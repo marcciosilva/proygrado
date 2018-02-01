@@ -33,6 +33,9 @@ SERIAL_RAW_DATA_GENERATION = True
 SUPPORTED_PROBLEM_TYPES = [
     [0, 0, 0]
 ]
+MACHINE_AMOUNT = 16
+MAX_TASK_AMOUNT = 1024
+MIN_TASK_AMOUNT = MACHINE_AMOUNT + 1
 
 
 class InstanceTypes(Enum):
@@ -90,9 +93,8 @@ def get_amount_of_instances_to_generate_for_instance_type(instance_type):
 
 
 def populate_supported_problem_sizes():
-    max_task_amount = 1024
-    for i in range(1, max_task_amount + 1):
-        SUPPORTED_PROBLEM_SIZES[i] = 4
+    for i in range(MIN_TASK_AMOUNT, MAX_TASK_AMOUNT + 1):
+        SUPPORTED_PROBLEM_SIZES[i] = MACHINE_AMOUNT
 
 
 def generate_raw_data_generation_script():
