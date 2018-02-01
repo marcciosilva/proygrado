@@ -1,9 +1,9 @@
 import math
 import pdb
 import sys
-
 import pandas
 import numpy
+import gc
 from sklearn.externals import joblib
 from sklearn import svm
 from sklearn.model_selection import cross_val_score
@@ -15,19 +15,39 @@ training_examples_base_dir = 'examples/'
 module_name = ''
 machine_amount = 4  # TODO receive as parameter.
 task_amount = 128  # TODO receive as parameter.
+problem_instance_amount = 100
 
-
-def create_train_and_persist_classifier():
+# this method is created to manage the memory issues on training with the classifiers.
+def create_train_and_persist_classifier(type):
     initialize_instance_variables()
+    pipeline_classifier = create_pipeline_classifier(type)
+    persist_classifier(pipeline_classifier)
+    for number_of_csv in range(0,problem_instance_amount):
+        print("Training with csv: " + str(number_of_csv))
+        pipeline_classifier = joblib.load('classifier.pkl')
+        training_set_dataframe = load_csv(number_of_csv)
+        target_column = remove_target_column_from_dataframe(training_set_dataframe)
+        pipeline_classifier = train_classifier(pipeline_classifier, training_set_dataframe, target_column)
+        persist_classifier(pipeline_classifier)
+        pipeline_classifier = None
+        target_column = None
+        training_set_dataframe = None
+        gc.collect()
+
+def load_csv(number_of_csv):
+    return pandas.read_csv(training_examples_base_dir + str(number_of_csv) + ".csv", header=None, delimiter=',')
+
+def create_train_and_persist_classifier_with_CV(type):
+    initialize_instance_variables()
+    pipeline_classifier = create_pipeline_classifier(type)
     training_and_testing_sets_dataframe = get_training_and_testing_sets_dataframe()
     target_column = remove_target_column_from_dataframe(training_and_testing_sets_dataframe)
-    pipeline_classifier = create_pipeline_classifier('SVM')
     # Run cross validation with pipeline and target data.
-    scores = cross_val_score(pipeline_classifier, training_and_testing_sets_dataframe, target_column, cv=5)
-    save_results_to_file(pipeline_classifier, scores)
+    #scores = cross_val_score(pipeline_classifier, training_and_testing_sets_dataframe, target_column, cv=5)
+    #save_results_to_file(pipeline_classifier, scores)
     # Train the classifier and persist it.
-    #pipeline_classifier = train_classifier(pipeline_classifier, training_and_testing_sets_dataframe, target_column)
-    #persist_classifier(pipeline_classifier)
+    pipeline_classifier = train_classifier(pipeline_classifier, training_and_testing_sets_dataframe, target_column)
+    persist_classifier(pipeline_classifier)
 
 
 def initialize_instance_variables():
@@ -123,7 +143,6 @@ def train_classifier(pipeline_classifier, training_data, target_to_learn):
     pipeline_classifier.fit(training_data, target_to_learn)
     return pipeline_classifier
 
-problem_instance_amount = 10
-elements = list(numpy.arange(10, 100, 10))
-for problem_instance_amount in elements:
-    create_train_and_persist_classifier()
+
+#create_train_and_persist_classifier('SVM')
+create_train_and_persist_classifier_with_CV('SVM')
