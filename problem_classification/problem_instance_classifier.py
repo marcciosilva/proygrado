@@ -29,8 +29,8 @@ def classify_problem_instance(csv_problem_instance_path, classifier_path):
     calculated_makespan = get_makespan_for_examples_dataframe(problem_instance_dataframe)
     # print('calculated makespan: ' + str(calculated_makespan))
     # print('makespan difference (expected - calculated): ' + str(expected_makespan - calculated_makespan))
-    print(str(expected_makespan) + ' ' + str(calculated_makespan) + ' ' + str(task_amounts) + ' ' + str(machine_amount))
-    return results
+    return str(expected_makespan) + ' ' + str(calculated_makespan)
+    # return results
 
 
 def load_csv_problem_instance(path):
