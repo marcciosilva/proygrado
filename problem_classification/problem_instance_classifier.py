@@ -8,6 +8,7 @@ task_amounts = [128, 256, 512, 1024]
 
 
 def main():
+    # TODO this is for testing only, classify_problem_instance will be called from outside.
     for task_amount in task_amounts:
         # print("############# " + str(task_amount) + "x" + str(machine_amount) + "#############")
         # TODO receive paths from calling module

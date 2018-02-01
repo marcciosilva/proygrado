@@ -20,7 +20,7 @@ PROCESSED_DATA_DIRECTORY = 'data-processed/'
 # If the data generation is not serial, this should be an even number, so each generation + parsing task is
 # contained in a single job.
 JOB_AMOUNT = 1  # TODO make this not matter when serial data generation is used.
-AMOUNT_OF_TEST_PROBLEM_INSTANCES_TO_GENERATE = 10
+AMOUNT_OF_TEST_PROBLEM_INSTANCES_TO_GENERATE = 0
 AMOUNT_OF_TRAINING_PROBLEM_INSTANCES_TO_GENERATE = 10
 SUPPORTED_PROBLEM_SIZES = {}  # Loaded at runtime.
 # Whether to generate data serially (so one job will basically generate all of the .in and .out pairs for
@@ -31,7 +31,7 @@ SERIAL_RAW_DATA_GENERATION = True
 #   Element at index 1 is the machine heterogeneity (possible values: 0, 1)
 #   Element at index 2 is the consistency type (possible values: 0, 1, 2)
 SUPPORTED_PROBLEM_TYPES = [
-    [0, 0, 1]
+    [0, 0, 0]
 ]
 
 
