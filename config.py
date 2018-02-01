@@ -1,0 +1,3 @@
+# File types of the generated raw data.
+RAW_PROBLEM_INSTANCE_INPUT_FILE_EXTENSION = '.in'
+RAW_PROBLEM_INSTANCE_OUTPUT_FILE_EXTENSION = '.out'

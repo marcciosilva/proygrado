@@ -5,7 +5,7 @@ solver
 # Datos
 jobs/
 ejemplos*/
-data*/
+data-*/
 *.log
 models/
 *.pkl

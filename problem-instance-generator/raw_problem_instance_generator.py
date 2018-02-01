@@ -8,16 +8,15 @@ import subprocess
 import sys
 import time
 
-import generar_jobs
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+import utilities
+import config
 
 # Command to execute the problem instance generator (legacy software).
 GENERATOR_COMMAND = './generator'
 # Command to execute the problem solver, given a problem instance (legacy software).
 SOLVER_COMMAND = './solver'
 SEPARATOR = ' '
-# File types of the generated raw data.
-INPUT_SUFFIX = '.in'
-OUTPUT_SUFFIX = '.out'
 MOVE_COMMAND = 'mv'
 
 
@@ -32,7 +31,7 @@ def main():
         amount_of_instances = int(sys.argv[6])
         output_path = str(sys.argv[7])
     except Exception:
-        print('Usage: python training_example_generator.py task-amount \
+        print('Usage: python raw_problem_instance_generator.py task-amount \
 			machine-amount task-heterogeneity machine-heterogeneity \
 			consistency-type instance-amount output-dir')
         print('### Tipos ###')
@@ -43,7 +42,7 @@ def main():
         print('consistency-type : 0 = Consistent, 1 = Semiconsistent, 2 = Inconsistent')
         print('instance-amount : int')
         print('output-dir : str')
-        print('Example: python training_example_generator.py 4 16 0 0 0 100 \
+        print('Example: python raw_problem_instance_generator.py 4 16 0 0 0 100 \
 			data-raw/4x16-000/test/')
     for i in range(0, amount_of_instances):
         # The problem instance is generated.
@@ -58,16 +57,18 @@ def main():
         filename_regex = '.*\[(.*)\].*'
         match = re.search(filename_regex, output)
         filename = match.group(1)
-        cmd = SOLVER_COMMAND + SEPARATOR + filename + ' > ' + str(i) + OUTPUT_SUFFIX
+        cmd = SOLVER_COMMAND + SEPARATOR + filename + ' > ' + str(i) + config.RAW_PROBLEM_INSTANCE_OUTPUT_FILE_EXTENSION
         # The solver is applied to the generated problem instance.
         os.system(cmd)
-        os.rename(filename, str(i) + INPUT_SUFFIX)
+        os.rename(filename, str(i) + config.RAW_PROBLEM_INSTANCE_INPUT_FILE_EXTENSION)
         # The output directory is generated if it doesn't exist (view docs).
-        generar_jobs.generate_dir(output_path)
+        utilities.generate_dir(output_path)
         # Generated files are moved to the destination folder.
-        cmd = MOVE_COMMAND + SEPARATOR + str(i) + OUTPUT_SUFFIX + SEPARATOR + output_path
+        cmd = MOVE_COMMAND + SEPARATOR + str(
+            i) + config.RAW_PROBLEM_INSTANCE_OUTPUT_FILE_EXTENSION + SEPARATOR + output_path
         os.system(cmd)
-        cmd = MOVE_COMMAND + SEPARATOR + str(i) + INPUT_SUFFIX + SEPARATOR + output_path
+        cmd = MOVE_COMMAND + SEPARATOR + str(
+            i) + config.RAW_PROBLEM_INSTANCE_INPUT_FILE_EXTENSION + SEPARATOR + output_path
         os.system(cmd)
         # A sleep is required because if generator calls are too close (in time) to each other, 
         # maybe the C/C++ random seed isn't regenerated and the exact same problem instance is
@@ -75,8 +76,9 @@ def main():
         time.sleep(1)
     # Now I have a pair of .in and .out files in my output directory, representing a complete
     # problem instance (featuring an input or representation, and output or solution).
-    print('Pair of ' + INPUT_SUFFIX + ' and ' + OUTPUT_SUFFIX \
-          + ' files generated at ' + output_path)
+    print(
+        'Pair of ' + config.RAW_PROBLEM_INSTANCE_INPUT_FILE_EXTENSION + ' and ' + config.RAW_PROBLEM_INSTANCE_OUTPUT_FILE_EXTENSION \
+        + ' files generated at ' + output_path)
 
 
 if __name__ == "__main__":

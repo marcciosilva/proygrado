@@ -4,12 +4,13 @@ This module parses pairs of .in and .out files and returns an .csv file, which w
 be used as a training example for some classifier.
 It also handles the directory generation for each file.
 '''
-import csv
+import os
 import re
 import sys
 
-import training_example_generator
-import generar_jobs
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+import utilities
+import config
 
 
 def main():
@@ -19,16 +20,16 @@ def main():
         input_path = str(sys.argv[2])
         output_path = str(sys.argv[3])
     except Exception:
-        print('Usage: python parser.py instance-amount input-directory \
+        print('Usage: python parser_raw_to_csv.py instance-amount input-directory \
 			output-directory')
         print('### Types ###')
         print('instance-amount : int')
         print('input-directory : str')
         print('output-directory : str')
-        print('Example: python parser.py 100 data-raw/4x16-000/test/ data-processed/4x16-000/test/')
+        print('Example: python parser_raw_to_csv.py 100 data-raw/4x16-000/test/ data-processed/4x16-000/test/')
     for i in range(0, instance_amount):
         # The problem's input is accessed (.in file).
-        tmp_file = open(input_path + str(i) + training_example_generator.INPUT_SUFFIX, 'r')
+        tmp_file = open(input_path + str(i) + config.RAW_PROBLEM_INSTANCE_INPUT_FILE_EXTENSION, 'r')
         first_line = tmp_file.readline()
         # The problem's dimension is obtained - which should be declared at the beginning of
         # the .in file.
@@ -43,7 +44,7 @@ def main():
             value = float(match.group(1))
             etc_matrix.append(value)
         # The solution file is accessed (.out file).
-        tmp_file = open(input_path + str(i) + training_example_generator.OUTPUT_SUFFIX, 'r')
+        tmp_file = open(input_path + str(i) + config.RAW_PROBLEM_INSTANCE_OUTPUT_FILE_EXTENSION, 'r')
         # The three first lines are ignored (they include the makespan value and some other stuff).
         for _ in range(0, 3):
             tmp_file.readline()
@@ -51,7 +52,7 @@ def main():
         # The solution vector is obtained.
         solution_vector = [int(s) for s in line.split() if s.isdigit()]
         # The output directory is generated in case if it doesn't exist (view docs).
-        generar_jobs.generate_dir(output_path)
+        utilities.generate_dir(output_path)
         # A .csv file is generated
         import pandas as pd
         datasetMatrix = []
