@@ -5,7 +5,7 @@ This script generates one (or multiple) .sh file that'll handle the generation o
 import math
 import os.path
 import sys
-from enum import Enum, auto
+from enum import Enum
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import utilities
@@ -39,8 +39,8 @@ MIN_TASK_AMOUNT = MACHINE_AMOUNT + 1
 
 
 class InstanceTypes(Enum):
-    Training = auto()
-    Test = auto()
+    Training = 1
+    Test = 2
 
 
 def main():
