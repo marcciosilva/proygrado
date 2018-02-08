@@ -1,20 +1,26 @@
+import random
+
 import pandas
 import pdb
 import sys
+import numpy
 from sklearn.externals import joblib
 
 machine_amount = 4
-task_amounts = [128, 256, 512, 1024]
+
+
+# task_amounts = [128, 256, 512, 1024]
 
 
 def main():
+    pass
     # TODO this is for testing only, classify_problem_instance will be called from outside.
-    for task_amount in task_amounts:
-        # print("############# " + str(task_amount) + "x" + str(machine_amount) + "#############")
-        # TODO receive paths from calling module
-        csv_problem_instance_path = str(task_amount) + 'x4.csv'
-        classifier_path = 'svm100Inst-EscaladoInter.pkl'
-        obtained_results_vector = classify_problem_instance(csv_problem_instance_path, classifier_path)
+    # for task_amount in task_amounts:
+    # # print("############# " + str(task_amount) + "x" + str(machine_amount) + "#############")
+    # # TODO receive paths from calling module
+    # csv_problem_instance_path = str(task_amount) + 'x4.csv'
+    # classifier_path = 'svm100Inst-EscaladoInter.pkl'
+    # obtained_results_vector = classify_problem_instance(csv_problem_instance_path, classifier_path)
 
 
 def classify_problem_instance(csv_problem_instance_path, classifier_path):
@@ -22,15 +28,24 @@ def classify_problem_instance(csv_problem_instance_path, classifier_path):
     expected_makespan = get_makespan_for_examples_dataframe(problem_instance_dataframe)
     # print('expected makespan: ' + str(expected_makespan))
     remove_target_column_from_dataframe(problem_instance_dataframe)
-    classifier = joblib.load(classifier_path)
-    results = classifier.predict(problem_instance_dataframe)
+    generating_random_solutions = classifier_path.find("random") != -1
+    if generating_random_solutions:
+        results = []
+        row_amount = problem_instance_dataframe.shape[0]
+        for row in range(0, row_amount):
+            random_machine_selection = random.randint(0, machine_amount)
+            results.append(float(random_machine_selection))
+        results = numpy.array(results)
+    else:
+        classifier = joblib.load(classifier_path)
+        results = classifier.predict(problem_instance_dataframe)
     new_classification_column = pandas.DataFrame({'classification': results})
     problem_instance_dataframe = problem_instance_dataframe.join(new_classification_column)
     calculated_makespan = get_makespan_for_examples_dataframe(problem_instance_dataframe)
-    # print('calculated makespan: ' + str(calculated_makespan))
-    # print('makespan difference (expected - calculated): ' + str(expected_makespan - calculated_makespan))
-    return str(expected_makespan) + ' ' + str(calculated_makespan)
-    # return results
+    return {
+        "expected_makespan": expected_makespan,
+        "calculated_makespan": calculated_makespan
+    }
 
 
 def load_csv_problem_instance(path):
