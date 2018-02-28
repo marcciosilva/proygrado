@@ -60,14 +60,14 @@ def remove_target_column_from_dataframe(dataframe):
 
 # TODO move utility to wherever it makes sense (in problem_instance_classifier.py).
 def get_makespan_for_examples_dataframe(training_and_testing_sets_dataframe):
-    makespan = 0.0
+    makespan_array = [0.0] * machine_amount
     try:
         for current_training_instance in range(0, len(training_and_testing_sets_dataframe)):
             # If machine_amount == 4, access 5th column ie 4th index.
             current_row = training_and_testing_sets_dataframe.loc[current_training_instance]
             assigned_machine_for_task = int(current_row[machine_amount])
-            makespan += current_row[assigned_machine_for_task]
-        return makespan
+            makespan_array[assigned_machine_for_task] += current_row[assigned_machine_for_task]
+        return numpy.amax(makespan_array)
     except Exception:
         type, value, traceback = sys.exc_info()
         pdb.set_trace()
