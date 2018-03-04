@@ -123,6 +123,9 @@ ENV/
 training/*.csv
 training/*.out
 
+
 # Muro's virtualenv folders
 proyecto-env/
 proygrad-env/
+environment/
+analysis/*.out

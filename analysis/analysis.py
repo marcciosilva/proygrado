@@ -4,7 +4,7 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '../problem_classification'))
 import problem_instance_classifier
 
-MACHINE_AMOUNT = 4
+MACHINE_AMOUNT = 16
 MIN_TASK_AMOUNT = MACHINE_AMOUNT + 1
 MAX_TASK_AMOUNT = 1024
 
@@ -13,15 +13,15 @@ CLASSIFIER_DIRECTORY = '../problem_classification/'
 PROBLEM_TYPE = '000'  # TODO improve this
 PROBLEM_INSTANCE_AMOUNT_PER_TYPE = 10
 CLASSIFIER_FILENAMES = [
-    "128x4-100Instancias-ANN-EscaladoIndependiente.pkl",
-    "128x4-100Instancias-ANN-EscaladoInter.pkl",
-    "128x4-100Instancias-SVM-EscaladoIndependiente.pkl",
-    "128x4-100Instancias-SVM-EscaladoInter.pkl",
-    "512x16-100Instancias-ANN-EscaladoIndependiente.pkl",
-    "512x16-100Instancias-ANN-EscaladoInter.pkl",
-    "512x16-100Instancias-SVM-EscaladoIndependiente.pkl",
-    "512x16-100Instancias-SVM-EscaladoInter.pkl",
-    "random"
+    #"128x4-100Instancias-ANN-EscaladoIndependiente.pkl",
+    #"128x4-100Instancias-ANN-EscaladoInter.pkl",
+    #"128x4-100Instancias-SVM-EscaladoIndependiente.pkl",
+    #"128x4-100Instancias-SVM-EscaladoInter.pkl"
+    "512x16-100Instancias-ANN-EscaladoIndependiente.pkl"
+    #"512x16-100Instancias-ANN-EscaladoInter.pkl",
+    #"512x16-100Instancias-SVM-EscaladoIndependiente.pkl",
+    #"512x16-100Instancias-SVM-EscaladoInter.pkl"
+    #"random"
 ]
 
 def main():

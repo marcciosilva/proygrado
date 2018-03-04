@@ -6,7 +6,7 @@ import sys
 import numpy
 from sklearn.externals import joblib
 
-machine_amount = 4
+machine_amount = 16
 
 
 # task_amounts = [128, 256, 512, 1024]
@@ -33,7 +33,7 @@ def classify_problem_instance(csv_problem_instance_path, classifier_path):
         results = []
         row_amount = problem_instance_dataframe.shape[0]
         for row in range(0, row_amount):
-            random_machine_selection = random.randint(0, machine_amount)
+            random_machine_selection = random.randint(0, machine_amount - 1)
             results.append(float(random_machine_selection))
         results = numpy.array(results)
     else:
