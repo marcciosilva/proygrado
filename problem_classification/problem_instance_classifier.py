@@ -5,11 +5,10 @@ import pdb
 import sys
 import numpy
 from sklearn.externals import joblib
-
-machine_amount = 16
-
+import re
 
 # task_amounts = [128, 256, 512, 1024]
+machine_amount = 0
 
 
 def main():
@@ -23,28 +22,34 @@ def main():
     # obtained_results_vector = classify_problem_instance(csv_problem_instance_path, classifier_path)
 
 
+def set_machine_amount(new_machine_amount_value):
+    global machine_amount
+    machine_amount = new_machine_amount_value
+
+
 def classify_problem_instance(csv_problem_instance_path, classifier_path):
     problem_instance_dataframe = load_csv_problem_instance(csv_problem_instance_path)
     expected_makespan = get_makespan_for_examples_dataframe(problem_instance_dataframe)
-    # print('expected makespan: ' + str(expected_makespan))
-    remove_target_column_from_dataframe(problem_instance_dataframe)
+    expected_solution = remove_target_column_from_dataframe(problem_instance_dataframe)
     generating_random_solutions = classifier_path.find("random") != -1
     if generating_random_solutions:
-        results = []
+        obtained_solution = []
         row_amount = problem_instance_dataframe.shape[0]
         for row in range(0, row_amount):
             random_machine_selection = random.randint(0, machine_amount - 1)
-            results.append(float(random_machine_selection))
-        results = numpy.array(results)
+            obtained_solution.append(float(random_machine_selection))
+        obtained_solution = numpy.array(obtained_solution)
     else:
         classifier = joblib.load(classifier_path)
-        results = classifier.predict(problem_instance_dataframe)
-    new_classification_column = pandas.DataFrame({'classification': results})
-    problem_instance_dataframe = problem_instance_dataframe.join(new_classification_column)
+        obtained_solution = classifier.predict(problem_instance_dataframe)
+    obtained_solution_dataframe = pandas.DataFrame({'classification': obtained_solution})
+    problem_instance_dataframe = problem_instance_dataframe.join(obtained_solution_dataframe)
     calculated_makespan = get_makespan_for_examples_dataframe(problem_instance_dataframe)
+    accuracy = getAccuracyForProblemInstance(expected_solution, obtained_solution)
     return {
         "expected_makespan": expected_makespan,
-        "calculated_makespan": calculated_makespan
+        "calculated_makespan": calculated_makespan,
+        "accuracy": accuracy
     }
 
 
@@ -58,7 +63,6 @@ def remove_target_column_from_dataframe(dataframe):
     return target
 
 
-# TODO move utility to wherever it makes sense (in problem_instance_classifier.py).
 def get_makespan_for_examples_dataframe(training_and_testing_sets_dataframe):
     makespan_array = [0.0] * machine_amount
     try:
@@ -71,6 +75,16 @@ def get_makespan_for_examples_dataframe(training_and_testing_sets_dataframe):
     except Exception:
         type, value, traceback = sys.exc_info()
         pdb.set_trace()
+
+
+# TODO move utility to wherever it makes sense (in problem_instance_classifier.py).
+def getAccuracyForProblemInstance(expected_solution, obtained_solution):
+    amount_of_failed_classifications = 0
+    for i in range(0, machine_amount):
+        if obtained_solution[i] != expected_solution[i]:
+            amount_of_failed_classifications += 1
+    accuracy = 1 - amount_of_failed_classifications / machine_amount
+    return accuracy
 
 
 # Only run main() if being called directly.
