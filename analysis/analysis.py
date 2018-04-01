@@ -11,16 +11,26 @@ PROCESSED_DATA_DIRECTORY = '../problem_instance_generator/data-processed/'
 CLASSIFIER_DIRECTORY = '../problem_classification/'
 PROBLEM_TYPE = '000'  # TODO improve this
 PROBLEM_INSTANCE_AMOUNT_PER_TYPE = 10
+# The classifiers that don't specify their activation function in their file names (except the random
+# classifier which doesn't actually exist as such), use relu.
 CLASSIFIER_FILENAMES = [
+    # "512x16-100Instancias-ANN-4CapasOcultas-EscaladoInter.pkl",
+    # "512x16-100Instancias-ANN-3CapasOcultas-EscaladoInter.pkl",
     # "128x4-100Instancias-ANN-EscaladoIndependiente.pkl",
-    "128x4-100Instancias-ANN-EscaladoInter.pkl",
+    # "128x4-100Instancias-ANN-EscaladoInter.pkl",
     # "128x4-100Instancias-SVM-EscaladoIndependiente.pkl",
-    "128x4-100Instancias-SVM-EscaladoInter.pkl",
+    # "128x4-100Instancias-SVM-EscaladoInter.pkl",
     # "512x16-100Instancias-ANN-EscaladoIndependiente.pkl",
-    "512x16-100Instancias-ANN-EscaladoInter.pkl",
+    # "512x16-100Instancias-ANN-EscaladoInter.pkl",
     # "512x16-100Instancias-SVM-EscaladoIndependiente.pkl",
-    "512x16-100Instancias-SVM-EscaladoInter.pkl"
-    #"random"
+    # "512x16-100Instancias-SVM-EscaladoInter.pkl",
+    #"random",
+    "activation-functions-test/512x16-100Instancias-ANN-2CapasOcultas-EscaladoInter-Identity.pkl",#"./activation-functions-test/ANN_identity_2.pkl",
+    # "activation-functions-test/512x16-100Instancias-ANN-3CapasOcultas-EscaladoInter-Identity.pkl",#"./activation-functions-test/ANN_identity_3.pkl",
+    # "activation-functions-test/512x16-100Instancias-ANN-4CapasOcultas-EscaladoInter-Identity.pkl",#"./activation-functions-test/ANN_identity_4.pkl",
+    # "activation-functions-test/512x16-100Instancias-ANN-2CapasOcultas-EscaladoInter-Tanh.pkl",#"./activation-functions-test/ANN_tanh_2.pkl",
+    # "activation-functions-test/512x16-100Instancias-ANN-3CapasOcultas-EscaladoInter-Tanh.pkl",#"./activation-functions-test/ANN_tanh_3.pkl"
+    # "activation-functions-test/512x16-100Instancias-ANN-4CapasOcultas-EscaladoInter-Tanh.pkl"#"./activation-functions-test/ANN_tanh_4.pkl"
 ]
 
 def main():
