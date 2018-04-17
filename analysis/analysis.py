@@ -25,6 +25,7 @@ CLASSIFIER_FILENAMES = [
     # "512x16-100Instancias-SVM-EscaladoIndependiente.pkl",
     # "512x16-100Instancias-SVM-EscaladoInter.pkl",
     #"random",
+    # "activation-functions-test/512x16-100Instancias-ANN-2CapasOcultas-EscaladoInter-Logistic.pkl",
     "activation-functions-test/512x16-100Instancias-ANN-2CapasOcultas-EscaladoInter-Identity.pkl",#"./activation-functions-test/ANN_identity_2.pkl",
     # "activation-functions-test/512x16-100Instancias-ANN-3CapasOcultas-EscaladoInter-Identity.pkl",#"./activation-functions-test/ANN_identity_3.pkl",
     # "activation-functions-test/512x16-100Instancias-ANN-4CapasOcultas-EscaladoInter-Identity.pkl",#"./activation-functions-test/ANN_identity_4.pkl",
@@ -44,12 +45,14 @@ def main():
         machine_amount = int(regex_match[1])
         min_task_amount = machine_amount + 1
         problem_instance_classifier.set_machine_amount(machine_amount)
-        for task_amount in range(min_task_amount, MAX_TASK_AMOUNT + 1):
 
+        for task_amount in range(min_task_amount, MAX_TASK_AMOUNT + 1):
             expected_makespan_average = 0.0
             calculated_makespan_average = 0.0
             accuracy_average = 0.0
-
+            time_lost_in_bad_assignments = 0.0
+            # is_consistent_problem_dimension = True
+            # amount_inconsistent_problem_instances = 0.0
             for problem_instance_index in range(0, PROBLEM_INSTANCE_AMOUNT_PER_TYPE):
                 problem_instance_path = PROCESSED_DATA_DIRECTORY + str(task_amount) + 'x' + str(
                     machine_amount) + '-' + PROBLEM_TYPE + '/training/' + str(problem_instance_index) + '.csv'
@@ -58,17 +61,25 @@ def main():
                 expected_makespan_average += classification_results['expected_makespan']
                 calculated_makespan_average += classification_results['calculated_makespan']
                 accuracy_average += classification_results['accuracy']
-
+                time_lost_in_bad_assignments += classification_results['time_lost_in_bad_assignments']
+                # is_consistent_problem_instance = classification_results['is_consistent']
+                # if not is_consistent_problem_instance:
+                #     amount_inconsistent_problem_instances += 1
+                # is_consistent_problem_dimension = is_consistent_problem_dimension and is_consistent_problem_instance
             expected_makespan_average /= PROBLEM_INSTANCE_AMOUNT_PER_TYPE
             calculated_makespan_average /= PROBLEM_INSTANCE_AMOUNT_PER_TYPE
             accuracy_average /= PROBLEM_INSTANCE_AMOUNT_PER_TYPE
+            time_lost_in_bad_assignments /= PROBLEM_INSTANCE_AMOUNT_PER_TYPE
 
-            print('{0} {1} {2} {3} {4}'.format(
+            # percentage_of_inconsistent_problem_instances_for_dimension = float(amount_inconsistent_problem_instances / PROBLEM_INSTANCE_AMOUNT_PER_TYPE)
+            print('{0:.2f} {1:.2f} {2:.2f} {3} {4} {5:.2f}'.format(
                 expected_makespan_average,
                 calculated_makespan_average,
                 accuracy_average,
                 task_amount,
-                machine_amount))
+                machine_amount,
+                time_lost_in_bad_assignments))
+                # percentage_of_inconsistent_problem_instances_for_dimension))
 
 # Only run main() if being called directly.
 if __name__ == '__main__':
