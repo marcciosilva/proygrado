@@ -35,7 +35,8 @@
 int partition(float a[], int l, int r)
 {
     float pivot;
-    int i, j, t;
+    float t;
+    int i, j;
     pivot = a[l];
     i = l;
     j = r + 1;

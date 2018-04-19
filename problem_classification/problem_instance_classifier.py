@@ -27,9 +27,11 @@ def set_machine_amount(new_machine_amount_value):
     machine_amount = new_machine_amount_value
 
 
-def classify_problem_instance(csv_problem_instance_path, classifier_path):
+def classify_problem_instance(csv_problem_instance_path, classifier_path, print_shit):
+    if print_shit:
+        print("##### Expected makespan array #####")
     problem_instance_dataframe = load_csv_problem_instance(csv_problem_instance_path)
-    expected_makespan = get_makespan_for_examples_dataframe(problem_instance_dataframe)
+    expected_makespan = get_makespan_for_examples_dataframe(problem_instance_dataframe, print_shit)
     expected_solution = remove_target_column_from_dataframe(problem_instance_dataframe)
     generating_random_solutions = classifier_path.find("random") != -1
     if generating_random_solutions:
@@ -44,17 +46,19 @@ def classify_problem_instance(csv_problem_instance_path, classifier_path):
         obtained_solution = classifier.predict(problem_instance_dataframe)
     obtained_solution_dataframe = pandas.DataFrame({'classification': obtained_solution})
     problem_instance_dataframe = problem_instance_dataframe.join(obtained_solution_dataframe)
-    calculated_makespan = get_makespan_for_examples_dataframe(problem_instance_dataframe)
+    if print_shit:
+        print("##### Calculated makespan array #####")
+    calculated_makespan = get_makespan_for_examples_dataframe(problem_instance_dataframe, print_shit)
     accuracy = get_accuracy_for_problem_instance(expected_solution, obtained_solution)
     # TODO extra metrics
-    # is_consistent = is_problem_instance_consistent(problem_instance_dataframe)
+    is_consistent = is_problem_instance_consistent(problem_instance_dataframe)
     time_lost_in_bad_assignments = get_time_lost_in_bad_assignments(problem_instance_dataframe, expected_solution,
                                                                     obtained_solution)
     return {
         "expected_makespan": expected_makespan,
         "calculated_makespan": calculated_makespan,
         "accuracy": accuracy,
-        # "is_consistent": is_consistent,
+        "is_consistent": is_consistent,
         "time_lost_in_bad_assignments": time_lost_in_bad_assignments
     }
 
@@ -69,7 +73,7 @@ def remove_target_column_from_dataframe(dataframe):
     return target
 
 
-def get_makespan_for_examples_dataframe(training_and_testing_sets_dataframe):
+def get_makespan_for_examples_dataframe(training_and_testing_sets_dataframe, print_shit):
     makespan_array = [0.0] * machine_amount
     try:
         for current_training_instance in range(0, len(training_and_testing_sets_dataframe)):
@@ -77,6 +81,8 @@ def get_makespan_for_examples_dataframe(training_and_testing_sets_dataframe):
             current_row = training_and_testing_sets_dataframe.loc[current_training_instance]
             assigned_machine_for_task = int(current_row[machine_amount])
             makespan_array[assigned_machine_for_task] += current_row[assigned_machine_for_task]
+        if print_shit:
+            print(makespan_array)
         return numpy.amax(makespan_array)
     except Exception:
         type, value, traceback = sys.exc_info()
@@ -123,7 +129,7 @@ def is_problem_instance_consistent(problem_instance_dataframe):
         last_machine_index = len(current_row) - 2  # to ignore the classification value
         tmp_relations_for_current_row = []
         for j in range(0, last_machine_index):
-            tmp_relations_for_current_row.append(current_row[j] >= current_row[j + 1])
+            tmp_relations_for_current_row.append(current_row[j] > current_row[j + 1])
         # print (tmp_relations_for_current_row)
         if len(relations_for_current_row) == 0:
             relations_for_current_row = tmp_relations_for_current_row
