@@ -110,14 +110,12 @@ def create_pipeline_classifier(type,activation_type,hidden_layers_size):
 def create_neural_network_classifier(activation_type,hidden_layers_size):
     # Same heuristic as before to calculate neuron amount in inner layers.
     hidden_layer_amount = hidden_layers_size
-    print(hidden_layer_amount)
     training_instance_amount = problem_instance_amount * task_amount
     input_neuron_amount = machine_amount
     output_neuron_amount = 1
     alpha = 2
     hidden_layer_neuron_amount = training_instance_amount / (alpha * (input_neuron_amount + output_neuron_amount))
     hidden_layers = tuple([int(math.ceil(hidden_layer_neuron_amount))] * hidden_layer_amount)
-    print(activation_type)
     classifier = MLPClassifier(activation=activation_type,solver='lbfgs', alpha=1e-2,
                                hidden_layer_sizes=hidden_layers, random_state=1)
     return classifier
@@ -148,9 +146,11 @@ def train_classifier(pipeline_classifier, training_data, target_to_learn):
 
 
 gc.collect()
-for activation_type in ('identity','logistic'):
-    for hidden_layers_size in [2]:
+for activation_type in ('identity','tanh','relu'):
+    for hidden_layers_size in [2,3,4]:
         print(str(activation_type) + " " + str(hidden_layers_size))
         create_train_and_persist_classifier_with_CV('ANN',activation_type,hidden_layers_size)
         gc.collect()
+
+create_train_and_persist_classifier_with_CV('SVM',"","")
 #create_train_and_persist_classifier_with_CV('SVM')
