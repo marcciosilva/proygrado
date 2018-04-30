@@ -4,11 +4,11 @@ library("pracma")
 
 create_data_frame <- function(filename){
   classifier = read.csv(paste("csvs/",filename,sep=""))
-  size = length(names(classifier))
-  classifier[,size + 1] = classifier$esperado - classifier$obtenido
-  names(classifier)[size + 1] = "diff_esperado_con_obtenido"
-  classifier[,size + 2] = (classifier$obtenido / classifier$esperado * 100) - 100
-  names(classifier)[size + 2] = "diff_porcentual"
+  length(names(classifier))
+  classifier[,6] = classifier$esperado - classifier$obtenido
+  names(classifier)[6] = "diff_esperado_con_obtenido"
+  classifier[,7] = (classifier$obtenido / classifier$esperado * 100) - 100
+  names(classifier)[7] = "diff_porcentual"
   return(classifier)
 }
 
@@ -41,23 +41,23 @@ create_electrocardiogram = function(data1,data2,name_data1,name_data2,train_dime
 
 add_ranges_to_data = function(data,tareas,description){
   entry = 1
-  size = length(names(data))
   for (i in c(200,400,600,800,1000,1200)){
     from = i - 200
     to = i
     values_to_observe = data[,tareas] < to & data[,tareas] >= from
-    data[values_to_observe,size + 1] = paste(entry,"-",from,":",to,sep="")
+    data[values_to_observe,8] = paste(entry,"-",from,":",to,sep="")
     entry = entry + 1
   }
-  names(data)[size + 1] = "rango"
-  data[,size + 2] = description
-  names(data)[size + 2] = "Clasificador"
+  names(data)[8] = "rango"
+  data[,9] = description
+  names(data)[9] = "Clasificador"
   return(data)
 }
 
-create_box_plot = function(all_data,title,x_title,y_title,subtitle,Y){
+create_box_plot = function(all_data,medians,title,x_title,y_title,subtitle,Y){
   p <- ggplot(all_data) + 
     geom_boxplot(data=all_data,aes(x=all_data$rango, y=Y,fill=Clasificador),position=position_dodge(width = 0.9)) +
+    geom_text(data = medians, aes(x = rango, label = round(medians[2]), y = medians[2] + 0.08)) + 
     scale_fill_grey(start = 0.4, end = 1) +
     ggtitle(title) + labs(subtitle=subtitle,x=x_title,y=y_title) +
     theme(plot.title = element_text(family = "Roboto", color="#666666", face="bold", size=11, hjust=0)) +
@@ -80,41 +80,29 @@ create_graphics = function(file_name,dimension,description,file_post_fix){
   svm512 = add_ranges_to_data(svm512,4,"SVM")
   all_data = rbind(ann512,svm512)
   
+  
+  medians <- aggregate(diff_porcentual ~  rango, all_data, median)
   box_plot_percentage = create_box_plot(all_data,
+                                        medians,
                                         "Máximos, medianas y mínimos en clasificación de taras por rango",
                                         "Rango de tareas",
                                         "Diferencia entre makespan obtenido y esperado (%)",
                                         paste("Diferencia entre makespan obtenido y esperado en clasificación\nSVM y",description,"Dimension:",dimension),
                                         all_data$diff_porcentual
-                                        )
+  )
   ggsave(paste("2_medianas_diferencias",file_post_fix,".png",sep=""),width = 25, height = 15, units = "cm",dpi = 300)
   
+  medians <- aggregate(accuracy ~  rango, all_data, median)
   box_plot_accuracy = create_box_plot(all_data,
-                                        "Máximos, medianas y mínimos en clasificación de taras por rango",
-                                        "Rango de tareas",
-                                        "Accuracy",
-                                        paste("Accuracy para SVM y ",description,"Dimension:",dimension),
-                                        all_data$accuracy
+                                      medians,
+                                      "Máximos, medianas y mínimos en clasificación de taras por rango",
+                                      "Rango de tareas",
+                                      "Accuracy",
+                                      paste("Accuracy para SVM y ",description,"Dimension:",dimension),
+                                      all_data$accuracy
   )
   ggsave(paste("3_accuracy_",file_post_fix,".png",sep=""),width = 25, height = 15, units = "cm",dpi = 300)
-  
-  box_plot_accuracy = create_box_plot(all_data,
-                                      "Máximos, medianas y mínimos en clasificación de taras por rango",
-                                      "Rango de tareas",
-                                      "Porecentaje de selecciones de máquinas erroneas en las que se selecciona\nuna mejor máquina",
-                                      paste("Seleccion de mejores máquinas ",description,"Dimension:",dimension),
-                                      all_data$porcentaje_mejores
-  )
-  ggsave(paste("4_porcentaje_maquinas_mejores_",file_post_fix,".png",sep=""),width = 25, height = 15, units = "cm",dpi = 300)
-  
-  box_plot_accuracy = create_box_plot(all_data,
-                                      "Máximos, medianas y mínimos en clasificación de taras por rango",
-                                      "Rango de tareas",
-                                      "Makespan agregado por la selección de máquinas erroneas\nObtenido - Esperado",
-                                      paste("Makespan agregado ",description,"Dimension:",dimension),
-                                      all_data$extra_makespan
-  )
-  ggsave(paste("5_makespan_extra_",file_post_fix,".png",sep=""),width = 25, height = 15, units = "cm",dpi = 300)
+  return(all_data)
 }
 
 create_graphics("tanh_4.csv","512x16","ANN - 4 capas ocultas. Activación: tanh.","ann_4_capas_ocultas_tanh")
@@ -123,7 +111,7 @@ create_graphics("tanh_2.csv","512x16","ANN - 2 capas ocultas. Activación: tanh.
 
 create_graphics("tanh_3.csv","512x16","ANN - 3 capas ocultas. Activación: tanh.","ann_3_capas_ocultas_tanh")
 
-create_graphics("identity_2.csv","512x16","ANN - 2 capas ocultas. Activación: identity.","ann_2_capas_ocultas_identity")
+alldata = create_graphics("identity_2.csv","512x16","ANN - 2 capas ocultas. Activación: identity.","ann_2_capas_ocultas_identity")
 
 create_graphics("identity_3.csv","512x16","ANN - 3 capas ocultas. Activación: identity.","ann_3_capas_ocultas_identity")
 
