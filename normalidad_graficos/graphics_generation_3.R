@@ -59,6 +59,19 @@ create_box_plot = function(all_data,title,x_title,y_title,subtitle,Y){
   p <- ggplot(all_data) + 
     geom_boxplot(data=all_data,aes(x=all_data$rango, y=Y,fill=Clasificador),position=position_dodge(width = 0.9)) +
     scale_fill_grey(start = 0.4, end = 1) +
+    labs(x=x_title,y=y_title) +
+    theme(plot.title = element_text(family = "Roboto", color="#666666", face="bold", size=11, hjust=0)) +
+    theme(axis.title = element_text(family = "Roboto", color="#666666", face="bold", size=9)) +
+    theme(plot.subtitle = element_text(family = "Roboto", color="#666666", size=11)) +
+    theme(legend.position="bottom")
+  return(p)
+}
+
+create_box_plot_error_relativo = function(all_data,title,x_title,y_title,subtitle,Y){
+  p <- ggplot(all_data) + 
+    geom_boxplot(outlier.shape= NA, data=all_data,aes(x=all_data$rango, y=Y,fill=Clasificador),position=position_dodge(width = 0.9)) +
+    scale_fill_grey(start = 0.4, end = 1) +
+    coord_cartesian(ylim=c(-150,600)) +
     ggtitle(title) + labs(subtitle=subtitle,x=x_title,y=y_title) +
     theme(plot.title = element_text(family = "Roboto", color="#666666", face="bold", size=11, hjust=0)) +
     theme(axis.title = element_text(family = "Roboto", color="#666666", face="bold", size=9)) +
@@ -81,7 +94,7 @@ create_graphics = function(file_name,dimension,description,file_post_fix){
   all_data = rbind(ann512,svm512)
   
   box_plot_percentage = create_box_plot(all_data,
-                                        "Máximos, medianas y mínimos en clasificación de taras por rango",
+                                        "Comparación entre ANN Y SVM",
                                         "Rango de tareas",
                                         "Diferencia entre makespan obtenido y esperado (%)",
                                         paste("Diferencia entre makespan obtenido y esperado en clasificación\nSVM y",description,"Dimension:",dimension),
@@ -90,7 +103,7 @@ create_graphics = function(file_name,dimension,description,file_post_fix){
   ggsave(paste("2_medianas_diferencias",file_post_fix,".png",sep=""),width = 25, height = 15, units = "cm",dpi = 300)
   
   box_plot_accuracy = create_box_plot(all_data,
-                                        "Máximos, medianas y mínimos en clasificación de taras por rango",
+                                      "Comparación entre ANN Y SVM",
                                         "Rango de tareas",
                                         "Accuracy",
                                         paste("Accuracy para SVM y ",description,"Dimension:",dimension),
@@ -99,7 +112,7 @@ create_graphics = function(file_name,dimension,description,file_post_fix){
   ggsave(paste("3_accuracy_",file_post_fix,".png",sep=""),width = 25, height = 15, units = "cm",dpi = 300)
   
   box_plot_accuracy = create_box_plot(all_data,
-                                      "Máximos, medianas y mínimos en clasificación de taras por rango",
+                                      "Comparación entre ANN Y SVM",
                                       "Rango de tareas",
                                       "Porecentaje de selecciones de máquinas erroneas en las que se selecciona\nuna mejor máquina",
                                       paste("Seleccion de mejores máquinas ",description,"Dimension:",dimension),
@@ -108,13 +121,32 @@ create_graphics = function(file_name,dimension,description,file_post_fix){
   ggsave(paste("4_porcentaje_maquinas_mejores_",file_post_fix,".png",sep=""),width = 25, height = 15, units = "cm",dpi = 300)
   
   box_plot_accuracy = create_box_plot(all_data,
-                                      "Máximos, medianas y mínimos en clasificación de taras por rango",
+                                      "Comparación entre ANN Y SVM",
                                       "Rango de tareas",
-                                      "Makespan agregado por la selección de máquinas erroneas\nObtenido - Esperado",
+                                      "(Error Absoluto) Makespan agregado por la selección de máquinas erroneas\n(Obtenido - Esperado)",
                                       paste("Makespan agregado ",description,"Dimension:",dimension),
                                       all_data$extra_makespan
   )
-  ggsave(paste("5_makespan_extra_",file_post_fix,".png",sep=""),width = 25, height = 15, units = "cm",dpi = 300)
+  ggsave(paste("5_error_absoluto_",file_post_fix,".png",sep=""),width = 25, height = 15, units = "cm",dpi = 300)
+  if (file_name == "identity_2.csv"){
+    box_plot_accuracy = create_box_plot_error_relativo(all_data,
+                                                       "Comparación entre ANN Y SVM",
+                                                       "Rango de tareas",
+                                                       "(Error Relativo) Makespan agregado por la selección de máquinas erroneas\n(Obtenido - Esperado)/Esperado",
+                                                       paste("Makespan agregado ",description,"Dimension:",dimension),
+                                                       all_data$error_relativo
+    )  
+  } else {
+    box_plot_accuracy = create_box_plot(all_data,
+                                                       "Comparación entre ANN Y SVM",
+                                                       "Rango de tareas",
+                                                       "(Error Relativo) Makespan agregado por la selección de máquinas erroneas\n(Obtenido - Esperado)/Esperado",
+                                                       paste("Makespan agregado ",description,"Dimension:",dimension),
+                                                       all_data$error_relativo
+    )  
+  }
+  
+  ggsave(paste("6_error_relativo_",file_post_fix,".png",sep=""),width = 25, height = 15, units = "cm",dpi = 300)
 }
 
 create_graphics("tanh_4.csv","512x16","ANN - 4 capas ocultas. Activación: tanh.","ann_4_capas_ocultas_tanh")
@@ -137,44 +169,44 @@ create_graphics("relu_2.csv","512x16","ANN - 2 capas ocultas. Activación: relu"
 
 ## ACTIVACION TANH:
 ann_tanh_2 = create_data_frame("tanh_2.csv")
-ann_tanh_2 = add_ranges_to_data(ann_tanh_2,4,"ANN - 2 capas ocultas. Activación: tanh")
+ann_tanh_2 = add_ranges_to_data(ann_tanh_2,4,"ANN - 2 capas ocultas.")
 ann_tanh_3 = create_data_frame("tanh_3.csv")
-ann_tanh_3 = add_ranges_to_data(ann_tanh_3,4,"ANN - 3 capas ocultas. Activación: tanh")
+ann_tanh_3 = add_ranges_to_data(ann_tanh_3,4,"ANN - 3 capas ocultas.")
 ann_tanh_4 = create_data_frame("tanh_4.csv")
-ann_tanh_4 = add_ranges_to_data(ann_tanh_4,4,"ANN - 4 capas ocultas. Activación: tanh")
+ann_tanh_4 = add_ranges_to_data(ann_tanh_4,4,"ANN - 4 capas ocultas.")
 svm512 = create_data_frame("512x16-svm.csv")
 svm512 = add_ranges_to_data(svm512,4,"SVM")
 all_data = rbind(ann_tanh_2,ann_tanh_3,ann_tanh_4,svm512)
 
-p = create_box_plot(all_data,title = "Escalado en tareas\nComparación entre ANNs con activación tanh",subtitle = "ANN de 2, 3 y 4 capas ocultas con activación tanh",x_title = "Rangos de tareas",y_title = "Diferencia en makespan en (%)",Y = all_data$diff_porcentual)
+p = create_box_plot(all_data,title = "Escalado en tareas\nComparación entre ANNs con activación tanh",subtitle = "ANN de 2, 3 y 4 capas ocultas con activación tanh",x_title = "Rangos de tareas",y_title = "Porcentaje de diferencia entre makespan obtenido y esperado. \n(obtenido - esperado) x 100",Y = all_data$diff_porcentual)
 ggsave("comparacion_anns_tanh.png",width = 25, height = 15, units = "cm",dpi = 300)
 
 ## ACTIVACION IDENTITY:
 ann_identity_2 = create_data_frame("identity_2.csv")
-ann_identity_2 = add_ranges_to_data(ann_identity_2,4,"ANN - 2 capas ocultas. Activación: identity")
+ann_identity_2 = add_ranges_to_data(ann_identity_2,4,"ANN - 2 capas ocultas.")
 ann_identity_3 = create_data_frame("identity_3.csv")
-ann_identity_3 = add_ranges_to_data(ann_identity_3,4,"ANN - 3 capas ocultas. Activación: identity")
+ann_identity_3 = add_ranges_to_data(ann_identity_3,4,"ANN - 3 capas ocultas.")
 ann_identity_4 = create_data_frame("identity_4.csv")
-ann_identity_4 = add_ranges_to_data(ann_identity_4,4,"ANN - 4 capas ocultas. Activación: identity")
+ann_identity_4 = add_ranges_to_data(ann_identity_4,4,"ANN - 4 capas ocultas.")
 svm512 = create_data_frame("512x16-svm.csv")
 svm512 = add_ranges_to_data(svm512,4,"SVM")
 all_data = rbind(ann_identity_2,ann_identity_3,ann_identity_4,svm512)
 
-p = create_box_plot(all_data,title = "Escalado en tareas\nComparación entre ANNs con activación identity",subtitle = "ANN de 2, 3 y 4 capas ocultas con activación identity",x_title = "Rangos de tareas",y_title = "Diferencia en makespan en (%)",Y = all_data$diff_porcentual)
+p = create_box_plot(all_data,title = "Escalado en tareas\nComparación entre ANNs con activación identity",subtitle = "ANN de 2, 3 y 4 capas ocultas con activación identity",x_title = "Rangos de tareas",y_title = "Porcentaje de diferencia entre makespan obtenido y esperado. \n(obtenido - esperado) x 100",Y = all_data$diff_porcentual)
 ggsave("comparacion_anns_identity.png",width = 25, height = 15, units = "cm",dpi = 300)
 
 ## ACTIVACION RELU:
 ann_identity_2 = create_data_frame("relu_2.csv")
-ann_identity_2 = add_ranges_to_data(ann_identity_2,4,"ANN - 2 capas ocultas. Activación: relu")
+ann_identity_2 = add_ranges_to_data(ann_identity_2,4,"ANN - 2 capas ocultas.")
 ann_identity_3 = create_data_frame("relu_3.csv")
-ann_identity_3 = add_ranges_to_data(ann_identity_3,4,"ANN - 3 capas ocultas. Activación: relu")
+ann_identity_3 = add_ranges_to_data(ann_identity_3,4,"ANN - 3 capas ocultas.")
 ann_identity_4 = create_data_frame("relu_4.csv")
-ann_identity_4 = add_ranges_to_data(ann_identity_4,4,"ANN - 4 capas ocultas. Activación: relu")
+ann_identity_4 = add_ranges_to_data(ann_identity_4,4,"ANN - 4 capas ocultas.")
 svm512 = create_data_frame("512x16-svm.csv")
 svm512 = add_ranges_to_data(svm512,4,"SVM")
 all_data = rbind(ann_identity_2,ann_identity_3,ann_identity_4,svm512)
 
-p = create_box_plot(all_data,title = "Escalado en tareas\nComparación entre ANNs con activación relu",subtitle = "ANN de 2, 3 y 4 capas ocultas con activación relu",x_title = "Rangos de tareas",y_title = "Diferencia en makespan en (%)",Y = all_data$diff_porcentual)
+p = create_box_plot(all_data,title = "Escalado en tareas\nComparación entre ANNs con activación relu",subtitle = "ANN de 2, 3 y 4 capas ocultas con activación relu",x_title = "Rangos de tareas",y_title = "Porcentaje de diferencia entre makespan obtenido y esperado. \n(obtenido - esperado) x 100",Y = all_data$diff_porcentual)
 ggsave("comparacion_anns_relu.png",width = 25, height = 15, units = "cm",dpi = 300)
 
 ## COMPARACION 2 CAPAS TANH e IDENTITY

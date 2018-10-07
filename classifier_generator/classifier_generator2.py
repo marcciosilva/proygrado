@@ -43,7 +43,7 @@ def create_train_and_persist_classifier_with_CV(type,activation_type,hidden_laye
     training_and_testing_sets_dataframe = get_training_and_testing_sets_dataframe()
     target_column = remove_target_column_from_dataframe(training_and_testing_sets_dataframe)
     # Run cross validation with pipeline and target data.
-    #scores = cross_val_score(pipeline_classifier, training_and_testing_sets_dataframe, target_column, cv=5)
+    scores = cross_val_score(pipeline_classifier, training_and_testing_sets_dataframe, target_column, cv=5)
     #save_results_to_file(pipeline_classifier, scores)
     # Train the classifier and persist it.
     pipeline_classifier = train_classifier(pipeline_classifier, training_and_testing_sets_dataframe, target_column)
