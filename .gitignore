@@ -127,5 +127,8 @@ training/*.out
 # Muro's virtualenv folders
 proyecto-env/
 proygrad-env/
+*.csv
 environment/
 analysis/*.out
+*.png
+normalidad_graficos.old/
